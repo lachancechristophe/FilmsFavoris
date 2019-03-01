@@ -1,14 +1,12 @@
 <?php
 
 class Connection {
-    public function __construct(){}
-        
-    public function connectAndFetch()
-    {
+    private $pdolocal = 0;
+    public function __construct(){
         $conStr = sprintf("pgsql:host=%s;port=%d;dbname=%s;",
                           "127.0.0.1",
                           '5432',
-                          'testdb');
+                          'postgres');
         $user = 'postgres';
         $pass = 'Yoyo1234';
 
@@ -19,11 +17,15 @@ class Connection {
         ];
         try {
             $pdo = new PDO($conStr, $user, $pass, $options);
-            $stmt = $pdo->query('SELECT * FROM proprietairesvoitures');
 
-            return Proprietaires::displayFormatted($stmt);
+            $pdolocal = $pdo;
         } catch (\PDOException $e) {
             throw new \PDOException($e->getMessage(), (int)$e->getCode());
         }
+    }
+
+    public function getPDO()
+    {
+       return $pdolocal;
     }
 }
