@@ -1,5 +1,5 @@
 <?php
-class ShowMovies extends Page {
+class ShowMovie extends Page {
     private $moviesList = [];
     public function __construct(){
         $pdo = new Connection().getPDO();
