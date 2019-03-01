@@ -1,7 +1,7 @@
 <?php
     
     require ("lib/page.class.php");
-    require("../../dao/lib/Connection.class.php")
+    require("../../dao/lib/Connection.class.php");
     class Index extends Page
     {
 
