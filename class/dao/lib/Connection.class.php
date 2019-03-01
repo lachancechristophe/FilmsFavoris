@@ -6,11 +6,11 @@ class Connection {
     public function connectAndFetch()
     {
         $conStr = sprintf("pgsql:host=%s;port=%d;dbname=%s;",
-                          "192.168.56.10",
+                          "127.0.0.1",
                           '5432',
                           'testdb');
-        $user = 'master';
-        $pass = '123qweQWE';
+        $user = 'postgres';
+        $pass = 'Yoyo1234';
 
         $options = [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
