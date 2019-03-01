@@ -2,7 +2,7 @@
 class Page
 {
     protected $doc;
-    protected function showDoc()
+    public function showDoc()
     {
         echo $this->doc;
     }
