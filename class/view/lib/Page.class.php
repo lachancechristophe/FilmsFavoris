@@ -1,6 +1,12 @@
 <?php
 class Page
 {
+    protected $doc;
+    protected function showDoc()
+    {
+        echo $this->doc;
+    }
+    
     public function initHTML($titre, $css)
     {
         $retStr = "<!DOCTYPE html>\n";
