@@ -57,15 +57,6 @@ class Page
         return "<br/>\n";
     }
 
-    public function insertHeading()
-    {
-        $retStr = Page::beginEndBal("h1", "Voitures exotiques");
-        $retStr .= Page::beginEndBal("h2", "et leur propriétaire,");
-        $retStr .= Page::beginEndBal("h3", "Une véritable histoire d'amour.");
-        $retStr .= Page::beginEndBal("p", "Découvrez la passion de Christophe, Éric et Enrique Iglesias!");
-        return $retStr;
-    }
-
     public function beginEndBal($bal, $content)
     {
         $retStr = Page::beginBal($bal);

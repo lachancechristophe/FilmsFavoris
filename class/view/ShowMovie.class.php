@@ -29,7 +29,7 @@ class ShowMovie extends Page {
             $retStr .= parent::beginEndBal("td", $row['nom']);
             $retStr .= parent::beginEndBal("td", $row['producteur']);
             $retStr .= parent::beginEndBal("td", $row['datesortie']);
-            $lienFavoriter = "favorite.php?film_id=" . $row['id'];
+            $lienFavoriter = "show_movies.php?movie_id=" . $row['id'] . "&favorite=true";
             $retStr .= parent::beginEndBal("td", parent::createLink($lienFavoriter, 'Favoriter'));
 
             $retStr .= parent::endBal("tr");
