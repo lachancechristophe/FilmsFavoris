@@ -1,7 +1,7 @@
 <?php
 
 class Connection {
-    private $pdolocal = 0;
+    private $pdolocal;
     public function __construct(){
         $conStr = sprintf("pgsql:host=%s;port=%d;dbname=%s;",
                           "127.0.0.1",
@@ -18,7 +18,7 @@ class Connection {
         try {
             $pdo = new PDO($conStr, $user, $pass, $options);
 
-            $pdolocal = $pdo;
+            $this->pdolocal = $pdo;
         } catch (\PDOException $e) {
             throw new \PDOException($e->getMessage(), (int)$e->getCode());
         }
@@ -26,6 +26,6 @@ class Connection {
 
     public function getPDO()
     {
-       return $pdolocal;
+       return $this->pdolocal;
     }
 }

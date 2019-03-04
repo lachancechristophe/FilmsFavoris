@@ -2,7 +2,8 @@
 class ShowMovie extends Page {
     private $moviesList = [];
     public function __construct(){
-        $pdo = new Connection().getPDO();
+        $conn = new Connection();
+        $pdo = $conn->getPDO();
         $query = "SELECT * FROM movies;";
         $moviesList = $pdo->query($query);
         createFormatted($moviesList);
