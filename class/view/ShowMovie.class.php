@@ -15,10 +15,10 @@ class ShowMovie extends Page {
         $retStr .=parent::beginBal("tr");
 
         $retStr .= parent::beginEndBal("td", "ID");
-        $retStr .= parent::beginEndBal("td", "Nom");
-        $retStr .= parent::beginEndBal("td", "Producteur");
+        $retStr .= parent::beginEndBal("td", "Name");
+        $retStr .= parent::beginEndBal("td", "Producer");
         $retStr .= parent::beginEndBal("td", "Date");
-        $retStr .= parent::beginEndBal("td", "Favoriter");
+        $retStr .= parent::beginEndBal("td", "Favorite");
 
         $retStr .= parent::endBal("tr");
 
@@ -26,11 +26,11 @@ class ShowMovie extends Page {
             $retStr .= parent::beginBal("tr");
 
             $retStr .= parent::beginEndBal("td", $row['id']);
-            $retStr .= parent::beginEndBal("td", $row['nom']);
-            $retStr .= parent::beginEndBal("td", $row['producteur']);
-            $retStr .= parent::beginEndBal("td", $row['datesortie']);
+            $retStr .= parent::beginEndBal("td", $row['name']);
+            $retStr .= parent::beginEndBal("td", $row['producer']);
+            $retStr .= parent::beginEndBal("td", $row['release_date']);
             $lienFavoriter = "show_movies.php?movie_id=" . $row['id'] . "&favorite=true";
-            $retStr .= parent::beginEndBal("td", parent::createLink($lienFavoriter, 'Favoriter'));
+            $retStr .= parent::beginEndBal("td", parent::createLink($lienFavoriter, 'Make Favorite'));
 
             $retStr .= parent::endBal("tr");
         }
