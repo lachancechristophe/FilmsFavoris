@@ -9,6 +9,8 @@ class User extends Record
     
     // --------- CONST and properties --------- //
     
+    private $user_name;
+    private $hashed_password;
     
     // --------- Public services --------- //
 
