@@ -1,16 +1,18 @@
 <?php
-class ShowUser extends Page {
-    private $userList = [];
+class ShowMovie extends Page {
+    private $moviesList = [];
     public function __construct(){
-        $pdo = new Connection().getPDO();
-        $query = "SELECT * FROM user;";
-        $userList = $pdo->query($query);
-        createFormatted($userList);
+        $conn = new Connection();
+        $pdo = $conn->getPDO();
+        $query = "SELECT * FROM user";
+        $moviesList = $pdo->query($query);
+        $this->createFormatted($usersList);
     }
 
     private function createFormatted($stmt)
     {
-       $retStr = parent::beginBal("tr");
+        $retStr = parent::beginBal("table");
+        $retStr .=parent::beginBal("tr");
 
         $retStr .= parent::beginEndBal("td", "ID");
         $retStr .= parent::beginEndBal("td", "Username");
@@ -23,12 +25,14 @@ class ShowUser extends Page {
             $retStr .= parent::beginBal("tr");
 
             $retStr .= parent::beginEndBal("td", $row['id']);
-            $retStr .= parent::beginEndBal("td", $row['username']);
-            $lienSupprimer = "favorite.php?user_id=" . $row['id'];
-            $retStr .= parent::beginEndBal("td", parent::createLink($lienSupprimer, 'Supprimer'));
+            $retStr .= parent::beginEndBal("td", $row['user_name']);
+            
+            $lienFavoriter = "favorite.php?user_id=" . $row['id'];
+            $retStr .= parent::beginEndBal("td", parent::createLink($lienFavoriter, 'Favoriter'));
 
             $retStr .= parent::endBal("tr");
         }
-        $this->$doc .= $retStr;
+        $retStr .= parent::endBal("table");
+        $this->doc .= $retStr;
     }
 }
