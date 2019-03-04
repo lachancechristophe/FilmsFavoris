@@ -1,5 +1,5 @@
 <?php
-class ShowMovie extends Page {
+class ShowUser extends Page {
     private $moviesList = [];
     public function __construct(){
         $conn = new Connection();
