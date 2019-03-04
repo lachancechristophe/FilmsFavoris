@@ -14,6 +14,8 @@
             $this->doc .= parent::beginBal("br");
             $this->doc .= parent::createLink("show_movies.php", "Link to the movies");
             $this->doc .= parent::beginBal("br");
+            $this->doc .= parent::createLink("show_users.php", "Link to the list of users");
+            $this->doc .= parent::beginBal("br");
             $this->doc .= parent::createLink("show_favorites.php", "Link to the favorite movies");
             $this->doc .= parent::endBal("body");
             $this->doc .= parent::endBal("html");
