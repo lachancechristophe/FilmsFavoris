@@ -1,6 +1,6 @@
 <?php
 class ShowUser extends Page {
-    private $moviesList = [];
+    private $usersList = [];
     public function __construct(){
         $conn = new Connection();
         $pdo = $conn->getPDO();
