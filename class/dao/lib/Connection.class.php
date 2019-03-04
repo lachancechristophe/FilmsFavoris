@@ -1,7 +1,7 @@
 <?php
 
 class Connection {
-    private $pdolocal;
+    private $pdolocal = 0;
     public function __construct(){
         $conStr = sprintf("pgsql:host=%s;port=%d;dbname=%s;",
                           "127.0.0.1",

@@ -4,14 +4,15 @@ class ShowMovie extends Page {
     public function __construct(){
         $conn = new Connection();
         $pdo = $conn->getPDO();
-        $query = "SELECT * FROM movies;";
+        $query = "SELECT * FROM movie";
         $moviesList = $pdo->query($query);
-        createFormatted($moviesList);
+        $this->createFormatted($moviesList);
     }
 
     private function createFormatted($stmt)
     {
-       $retStr = parent::beginBal("tr");
+        $retStr = parent::beginBal("table");
+        $retStr .=parent::beginBal("tr");
 
         $retStr .= parent::beginEndBal("td", "ID");
         $retStr .= parent::beginEndBal("td", "Nom");
@@ -26,12 +27,14 @@ class ShowMovie extends Page {
 
             $retStr .= parent::beginEndBal("td", $row['id']);
             $retStr .= parent::beginEndBal("td", $row['nom']);
-            $retStr .= parent::beginEndBal("td", $row['adresse']);
-            $lienSupprimer = "favorite.php?film_id=" . $row['id'];
-            $retStr .= parent::beginEndBal("td", parent::createLink($lienSupprimer, 'Supprimer'));
+            $retStr .= parent::beginEndBal("td", $row['producteur']);
+            $retStr .= parent::beginEndBal("td", $row['datesortie']);
+            $lienFavoriter = "favorite.php?film_id=" . $row['id'];
+            $retStr .= parent::beginEndBal("td", parent::createLink($lienFavoriter, 'Favoriter'));
 
             $retStr .= parent::endBal("tr");
         }
-        $this->$doc .= $retStr;
+        $retStr .= parent::endBal("table");
+        $this->doc .= $retStr;
     }
 }
