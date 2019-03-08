@@ -9,8 +9,9 @@ if(!empty($_REQUEST['movie_id']) && $_REQUEST['favorite'] == "true"){
     $conn = new Connection();
     $pdo = $conn->getPDO();
     $query = "INSERT INTO favorite_movie (user_id, movie_id)";
-    $query .= "VALUES ('" . "', '" . "');";
-    $pdo->query($query);
+    $query .= "VALUES ('" . "', '" . $_REQUEST['movie_id'] . "');";
+    //$pdo->query($query);
+    echo $query;
     */
 }
 

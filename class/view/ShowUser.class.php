@@ -26,6 +26,7 @@ class ShowUser extends Page {
 
             $retStr .= parent::beginEndBal("td", $row['id']);
             $retStr .= parent::beginEndBal("td", $row['username']);
+
             $retStr .= parent::endBal("tr");
         }
         $retStr .= parent::endBal("table");
