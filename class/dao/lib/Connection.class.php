@@ -6,7 +6,7 @@ class Connection {
         $conStr = sprintf("pgsql:host=%s;port=%d;dbname=%s;",
                           "127.0.0.1",
                           '5432',
-                          'postgres');
+                          'favorite_movie');
         $user = 'postgres';
         $pass = 'Yoyo1234';
 

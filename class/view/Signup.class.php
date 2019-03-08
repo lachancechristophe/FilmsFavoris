@@ -74,7 +74,7 @@ class Signup extends Page
                     $conn = new Connection();
                     $pdo = $conn->getPDO();
 
-                    $sql = $pdo->prepare("SELECT * FROM public.user WHERE user_name=:uid");
+                    $sql = $pdo->prepare("SELECT * FROM public.movie_user WHERE username=:uid");
                     $sql->bindParam(':uid', $uid);
                     $sql->execute();
                     $data = $sql->fetchAll();
@@ -94,7 +94,7 @@ class Signup extends Page
                         $hashedPwd = password_hash($pwd,PASSWORD_DEFAULT);
 
 
-                        $sql= $pdo->prepare("INSERT INTO public.user (user_name, hashed_pwd) VALUES (:uid,:hashedPwd)");
+                        $sql= $pdo->prepare("INSERT INTO public.movie_user (username, hashed_password) VALUES (:uid,:hashedPwd)");
                         
                         $sql->bindParam(':uid', $uid);
                         $sql->bindParam(':hashedPwd', $hashedPwd);
