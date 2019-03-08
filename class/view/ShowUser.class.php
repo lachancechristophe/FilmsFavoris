@@ -4,8 +4,8 @@ class ShowUser extends Page {
     public function __construct(){
         $conn = new Connection();
         $pdo = $conn->getPDO();
-        $query = "SELECT * FROM user";
-        $moviesList = $pdo->query($query);
+        $query = "SELECT * FROM movie__user";
+        $usersList = $pdo->query($query);
         $this->createFormatted($usersList);
     }
 
@@ -25,11 +25,7 @@ class ShowUser extends Page {
             $retStr .= parent::beginBal("tr");
 
             $retStr .= parent::beginEndBal("td", $row['id']);
-            $retStr .= parent::beginEndBal("td", $row['user_name']);
-            
-            $lienFavoriter = "favorite.php?user_id=" . $row['id'];
-            $retStr .= parent::beginEndBal("td", parent::createLink($lienFavoriter, 'Favoriter'));
-
+            $retStr .= parent::beginEndBal("td", $row['username']);
             $retStr .= parent::endBal("tr");
         }
         $retStr .= parent::endBal("table");
