@@ -4,7 +4,7 @@ class ShowUser extends Page {
     public function __construct(){
         $conn = new Connection();
         $pdo = $conn->getPDO();
-        $query = "SELECT * FROM movie__user";
+        $query = "SELECT * FROM movie_user";
         $usersList = $pdo->query($query);
         $this->createFormatted($usersList);
     }
