@@ -10,6 +10,11 @@ class Movie extends Record
     
     // --------- CONST and properties --------- //
     
+    private $name;
+    private $producer;
+    private $release_date;
+    
+    
     
     // --------- Public services --------- //
 
