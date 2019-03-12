@@ -13,6 +13,8 @@ class Page
         $retStr .= "<html lang='fr'>\n";
         $retStr .= "<head>\n";
         $retStr .= "<title>".$titre."</title>\n";
+        $retStr .= '<link rel="stylesheet" type="text/css" href="style/style.css">';
+        
         if (!empty($css)) {
             $retStr .= '<link rel="stylesheet" type="text/css" href="' . $css .'">';
         }
@@ -39,7 +41,7 @@ class Page
 
     public function createLink($href, $text)
     {
-        return '<a href="' . $href . '">' . $text . '</a>';
+        return '<a class="btn" href="' . $href . '">' . $text . '</a>';
     }
 
     public function beginBal($bal)
