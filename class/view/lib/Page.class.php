@@ -9,6 +9,7 @@ class Page
     
     public function initHTML($titre, $css)
     {
+        $this->logoutcheck();
         $retStr = "<!DOCTYPE html>\n";
         $retStr .= "<html lang='fr'>\n";
         $retStr .= "<head>\n";
@@ -22,20 +23,59 @@ class Page
         $retStr .= "<body>\n";
         return $retStr;
     }
+    
     public function topNav()
     {
         $topNav = '';
         $topNav .= '<ul class="topNav">';
         $topNav .= '<li><a href="index.php">Accueil</a></li>';
-        $topNav .= '<li><a href="login.php">Login</a></li>';
+        
         $topNav .= '<li><a href="signup.php">Signup</a></li>';
         $topNav .= '<li><a href="show_movies.php">Show Movies</a></li>';
         $topNav .= '<li><a href="show_users.php">Show Users</a></li>';
         $topNav .= '<li><a href="show_favorites.php">Show Favorites</a></li>';
+        if(isset($_SESSION['user_id']))
+        {
+            $topNav .= '<li><form class="logout" method="POST">
+            <input name="log_id" type="hidden" value="logout">
+            <button class="logout" type="submit" name="submit">Logout</button></li>';
+            
+        }
+        else
+        {
+            $topNav .= '<li><a href="login.php">Login</a></li>';
+            
+        }
         $topNav .= '</ul>';
         return $topNav;
     }
-    
+    public function logoutCheck()
+    {
+         if(isset($_POST['log_id']))
+            {
+              
+                $f_id=$_POST['log_id'];
+                switch($f_id)
+                {
+                    case 'logout':
+                    {
+
+                        session_start();
+                        session_unset();
+                        session_destroy();
+
+                        header("location: index.php?logout");
+
+                        exit();
+
+
+                    }
+
+                    break; 
+                }   
+                        
+            }
+    }
     public function beginForm($method, $action, $name)
     {
         return "<form method='" . $method . "' action='" . $action . "' name='" . $name . "' >\n";

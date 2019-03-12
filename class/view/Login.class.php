@@ -32,7 +32,7 @@ class Login extends Page
         $conn = new Connection();
         $pdo = $conn->getPDO();
 
-        session_start();
+        #session_start();
    
         if($_SERVER["REQUEST_METHOD"] == "POST") 
         {
@@ -55,7 +55,7 @@ class Login extends Page
                 {
                     $_SESSION['user_id'] = $data[0]->id;
                     
-                    header("location: show_movies.php");
+                    header("location: show_movies.php?Login_succes");
                 }
                 else 
                 {
