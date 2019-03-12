@@ -5,7 +5,7 @@ body {
     color:#b3002d;
     margin: 0;
     padding: 0;
-    min-width: 980px;
+
     
 }
 
@@ -14,11 +14,14 @@ body {
     list-style: none;
     text-align: left;
    padding: 0;
+    margin:0;
     
 }
 .topNav li{
     
     display:inline-block;
+    padding: 1em 2em;
+     
 }
 .topNav a {
 
@@ -29,6 +32,7 @@ body {
   padding: 1em 2em;
   letter-spacing: 0.05rem;
   color:#b3002d;
+ 
     
  
 }

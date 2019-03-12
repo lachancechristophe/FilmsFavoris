@@ -55,7 +55,7 @@ class Login extends Page
                 {
                     $_SESSION['user_id'] = $data[0]->id;
                     
-                    header("location: show_movies.php?Login_succes");
+                    header("location: index.php?Login_succes");
                 }
                 else 
                 {
