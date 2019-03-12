@@ -13,8 +13,8 @@ class Page
         $retStr .= "<html lang='fr'>\n";
         $retStr .= "<head>\n";
         $retStr .= "<title>".$titre."</title>\n";
+        $retStr .= '<link rel="stylesheet" type="text/css" href="style/topNav.css">';
         $retStr .= '<link rel="stylesheet" type="text/css" href="style/style.css">';
-        
         if (!empty($css)) {
             $retStr .= '<link rel="stylesheet" type="text/css" href="' . $css .'">';
         }
@@ -22,7 +22,19 @@ class Page
         $retStr .= "<body>\n";
         return $retStr;
     }
-
+    public function topNav()
+    {
+        $topNav = '';
+        $topNav .= '<ul class="topNav">';
+        $topNav .= '<li><a href="login.php">Login</a></li>';
+        $topNav .= '<li><a href="signup.php">Signup</a></li>';
+        $topNav .= '<li><a href="show_movies.php">Show Movies</a></li>';
+        $topNav .= '<li><a href="show_users.php">Show Users</a></li>';
+        $topNav .= '<li><a href="show_favorites.php">Show Favorites</a></li>';
+        $topNav .= '</ul>';
+        return $topNav;
+    }
+    
     public function beginForm($method, $action, $name)
     {
         return "<form method='" . $method . "' action='" . $action . "' name='" . $name . "' >\n";
@@ -48,7 +60,7 @@ class Page
 
     public function createLink($href, $text)
     {
-        return '<a class="btn" href="' . $href . '">' . $text . '</a>';
+        return '<a href="' . $href . '">' . $text . '</a>';
     }
 
     public function beginBal($bal)
