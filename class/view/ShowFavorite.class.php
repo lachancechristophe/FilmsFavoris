@@ -6,7 +6,17 @@ class ShowFavorite extends Page {
         $pdo = $conn->getPDO();
         $query = "SELECT * FROM favorite_movie";
         $favoriteList = $pdo->query($query);
+        
+        
+        $this->doc = parent::initHTML("Show Favorite",'');
+            
+            
+        $this->doc .= parent::topNav(); 
+
         $this->createFormatted($favoriteList);
+        
+        $this->doc .= parent::endBal("body");
+        $this->doc .= parent::endBal("html");
     }
 
     private function createFormatted($stmt)

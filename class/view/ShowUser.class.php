@@ -6,7 +6,17 @@ class ShowUser extends Page {
         $pdo = $conn->getPDO();
         $query = "SELECT * FROM movie_user";
         $usersList = $pdo->query($query);
+        
+        $this->doc = parent::initHTML("Index",'');
+            
+            
+        $this->doc .= parent::topNav(); 
+        
+        
         $this->createFormatted($usersList);
+        
+        $this->doc .= parent::endBal("body");
+        $this->doc .= parent::endBal("html");
     }
 
     private function createFormatted($stmt)

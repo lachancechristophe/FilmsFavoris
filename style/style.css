@@ -7,3 +7,6 @@ body {
     min-width: 980px;
     
 }
+table {
+  border: 1px solid  #cc0000;
+}

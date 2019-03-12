@@ -7,14 +7,20 @@ class Login extends Page
     
     public function __construct()
     {        
-
+        
         $this->doc = parent::initHTML("Login", "");
-        $this->doc .= parent::endBal("body");
-        $this->doc .= parent::endBal("html");
+        
+        $this->doc .= parent::topNav();
+        
         $this->doc .= parent::beginForm("POST","","formLogin");
         $this->doc .= parent::insertInput("text","username","username :");
         $this->doc .= parent::insertInput("text","password","password :");
         $this->doc .= parent::insertInputWithValue("submit","btn-submit","","Valider");
+        
+        $this->doc .= parent::endBal("body");
+        $this->doc .= parent::endBal("html");
+        
+        
 
         $this->checkLogin();
 

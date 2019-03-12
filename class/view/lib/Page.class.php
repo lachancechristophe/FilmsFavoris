@@ -26,6 +26,7 @@ class Page
     {
         $topNav = '';
         $topNav .= '<ul class="topNav">';
+        $topNav .= '<li><a href="index.php">Accueil</a></li>';
         $topNav .= '<li><a href="login.php">Login</a></li>';
         $topNav .= '<li><a href="signup.php">Signup</a></li>';
         $topNav .= '<li><a href="show_movies.php">Show Movies</a></li>';
