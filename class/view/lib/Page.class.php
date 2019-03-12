@@ -34,6 +34,13 @@ class Page
         return $retStr . "<input name='" . $name . "' type='" . $type . "' value='' /> </p>";
     }
 
+    public function insertInputWithValue($type, $name, $humantext, $value)
+    {
+        return "<p><input name='" . $name . "' type='" . $type . "' value='" . $value . "' /> </p>";
+    }
+
+
+
     public function insertHidden($name, $value)
     {
         return "<input type='hidden' name='" . $name . "' value='" . $value . "' ></input>";
