@@ -1,0 +1,43 @@
+
+body {
+
+    background-color: #1f1a25;
+    color:#b3002d;
+    margin: 0;
+    padding: 0;
+    min-width: 980px;
+    
+}
+
+.topNav{
+    
+    list-style: none;
+    text-align: left;
+   padding: 0;
+    
+}
+.topNav li{
+    
+    display:inline-block;
+}
+.topNav a {
+
+  border: none;
+  cursor: pointer;
+  line-height: 1.5;
+  font: 700 1.2rem 'Roboto Slab', sans-serif;
+  padding: 1em 2em;
+  letter-spacing: 0.05rem;
+  color:#b3002d;
+    
+ 
+}
+
+
+
+.topNav a:hover {
+    transition: 0.5s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background:#b3002d;
+    color:#1f1a25;
+}
