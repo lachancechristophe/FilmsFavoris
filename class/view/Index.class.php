@@ -2,24 +2,35 @@
     
     class Index extends Page
     {
-
+        public $user;
         
         public function __construct()
         {
+            $this->sessionShow();
             
-            $this->doc = parent::initHTML("Index", "");
-            $this->doc .= parent::createLink("login.php", "Click here to Login"); 
-            $this->doc .= parent::beginBal("br");
-            $this->doc .= parent::createLink("signup.php", "Click here to signup");
-            $this->doc .= parent::beginBal("br");
-            $this->doc .= parent::createLink("show_movies.php", "Link to the movies");
-            $this->doc .= parent::beginBal("br");
-            $this->doc .= parent::createLink("show_users.php", "Link to the list of users");
-            $this->doc .= parent::beginBal("br");
-            $this->doc .= parent::createLink("show_favorites.php", "Link to the favorite movies");
+            $this->doc = parent::initHTML("Index",'');
+            
+            
+            $this->doc .= parent::topNav(); 
+            $this->doc .='<h1>Bienvenu utilisateur '.$this->user.'</h1>';
+        
             $this->doc .= parent::endBal("body");
             $this->doc .= parent::endBal("html");
                       
+        }
+        public function sessionShow()
+        {
+            if(isset($_SESSION['user_id']))
+            {
+                $this->user = $_SESSION['user_id'];
+                 
+            }
+            else{
+                
+                $this->user = "de l'espace";
+            }
+            
+            
         }
         
     

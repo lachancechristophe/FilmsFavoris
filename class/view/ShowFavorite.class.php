@@ -1,14 +1,22 @@
 <?php
-class ShowMovie extends Page {
-    private $favoritesList = [];
+class ShowFavorite extends Page {
+    private $favoriteList = [];
     public function __construct(){
         $conn = new Connection();
         $pdo = $conn->getPDO();
-        $query = "SELECT * FROM favorite_movie ";
-        $query .= "INNER JOIN movie ON favorite_movie.movie_id = movie.id";
-        $query .= "WHERE user_id = "; // TODO: Ajouter le UID de session
-        $favoritesList = $pdo->query($query);
-        $this->createFormatted($favoritesList);
+        $query = "SELECT * FROM favorite_movie";
+        $favoriteList = $pdo->query($query);
+        
+        
+        $this->doc = parent::initHTML("Show Favorite",'');
+            
+            
+        $this->doc .= parent::topNav(); 
+
+        $this->createFormatted($favoriteList);
+        
+        $this->doc .= parent::endBal("body");
+        $this->doc .= parent::endBal("html");
     }
 
     private function createFormatted($stmt)
@@ -16,21 +24,18 @@ class ShowMovie extends Page {
         $retStr = parent::beginBal("table");
         $retStr .=parent::beginBal("tr");
 
-        $retStr .= parent::beginEndBal("td", "ID");
-        $retStr .= parent::beginEndBal("td", "Name");
-        $retStr .= parent::beginEndBal("td", "Producer");
-        $retStr .= parent::beginEndBal("td", "Date");
+        $retStr .= parent::beginEndBal("td", "ID User");
+        $retStr .= parent::beginEndBal("td", "ID Movie");
+        
+        
 
         $retStr .= parent::endBal("tr");
 
         foreach ($stmt as $row) {
             $retStr .= parent::beginBal("tr");
 
-            $retStr .= parent::beginEndBal("td", $row['id']);
-            $retStr .= parent::beginEndBal("td", $row['name']);
-            $retStr .= parent::beginEndBal("td", $row['producer']);
-            $retStr .= parent::beginEndBal("td", $row['release_date']);
-
+            $retStr .= parent::beginEndBal("td", $row['user_id']);
+            $retStr .= parent::beginEndBal("td", $row['movie_id']);
             $retStr .= parent::endBal("tr");
         }
         $retStr .= parent::endBal("table");

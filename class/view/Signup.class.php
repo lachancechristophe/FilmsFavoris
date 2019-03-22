@@ -7,18 +7,28 @@ class Signup extends Page
     
     function __construct()
     {
-        $this->doc = '';
-        $this->signUpCheck();
-        $this->formSignUp();
+        
+            $this->doc = parent::initHTML("Signup",'');
+
+
+            $this->doc .= parent::topNav(); 
+
+            $this->signUpCheck();
+            $this->doc .= $this->formSignUp();
+
+            $this->doc .= parent::endBal("body");
+            $this->doc .= parent::endBal("html");
+        
     }
     function formSignUp()
     {
-        $this->doc.='<form class="signUp" action="signup.php" method="POST" >
+        $form ='<form class="signUp" action="signup.php" method="POST" >
             <input type="text" name="uid" placeholder="Username">
             <input type="password" name="pwd" placeholder="password">
             <button type="submit" name="submit">Sign up</button>
             <input name= "f_id" type="hidden" value="signup">
-            </form><a href="index.php">acceuil</a>';
+            </form>';
+        return $form;
         
         
         
