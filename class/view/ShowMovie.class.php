@@ -47,4 +47,6 @@ class ShowMovie extends Page {
         $retStr .= parent::endBal("table");
         $this->doc .= $retStr;
     }
+
+    
 }
