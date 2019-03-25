@@ -51,7 +51,10 @@ class Page
             $topNav .= '<li><a href="login.php">Login</a></li>';
             
         }
-        $topNav .= '</ul></nav>';
+        
+        $topNav .= '</ul></nav><label for="nav-toggle" class="nav-toggle-label"><span></span>
+        </label>';
+       
         $topNav .= '</div>';
         return $topNav;
     }
