@@ -59,13 +59,13 @@ class Login extends Page
                 }
                 else 
                 {
-                    echo "Your Login Name or Password is invalid";
+                    $this->doc .= "Your Login Name or Password is invalid";
                 }
                 
             }
             else 
             {
-                echo "Your Login Name or Password is invalid";
+                $this->doc .= "Your Login Name or Password is invalid";
             }
             
         }
