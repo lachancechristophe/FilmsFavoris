@@ -54,7 +54,7 @@ class Login extends Page
                 if(password_verify($mypassword,$passwordpg))
                 {
                     $_SESSION['user_id'] = $data[0]->id;
-                    
+                    $_SESSION['user_name'] = $data[0]->username;
                     header("location: index.php?Login_succes");
                 }
                 else 
