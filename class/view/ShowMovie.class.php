@@ -18,6 +18,22 @@ class ShowMovie extends Page {
         $this->doc .= parent::endBal("body");
         $this->doc .= parent::endBal("html");
     }
+    public function makeFavorite()
+    {
+        if(!empty($_REQUEST['movie_id']) && $_REQUEST['favorite'] == "true" && !empty($_SESSION['user_id'])){
+
+            $conn = new Connection();
+            $pdo = $conn->getPDO();
+            $query = "INSERT INTO favorite_movie (user_id, movie_id)";
+            $query .= "VALUES ('" . $_SESSION['user_id'] . "', '" . $_REQUEST['movie_id'] . "');";
+            $pdo->query($query);
+            $this->doc .= "vous avez favoriter un film!";
+        
+        }
+        
+
+
+    }
 
     private function createFormatted($stmt)
     {

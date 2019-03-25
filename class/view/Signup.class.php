@@ -108,7 +108,7 @@ class Signup extends Page
 
 
                         $sql= $pdo->prepare("INSERT INTO public.movie_user (username, hashed_password)
-                         VALUES (:uid,:hashedPwd)");
+                        VALUES (:uid,:hashedPwd)");
                         
                         $sql->bindParam(':uid', $uid);
                         $sql->bindParam(':hashedPwd', $hashedPwd);
