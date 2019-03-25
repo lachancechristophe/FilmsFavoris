@@ -29,7 +29,7 @@ class Page
     {
         $topNav = '';
         $topNav .= '<div class="topNav">';
-        $topNav .='<img class="logo"src="style/img/logo.jpg" alt="logo" height="82" width="82">
+        $topNav .='<img class="logo" src="style/img/logo.jpg" alt="logo" height="82" width="82">
         <input type="checkbox" id="nav-toggle" class="nav-toggle">
         <nav>';
         $topNav .= '<ul>';
