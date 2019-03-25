@@ -21,7 +21,7 @@ class ShowFavorite extends Page {
 
     private function createFormatted($stmt)
     {
-        $retStr = parent::beginBal("table");
+        $retStr = parent::beginBal('table class ="steelBlueCols"');
         $retStr .=parent::beginBal("tr");
 
         $retStr .= parent::beginEndBal("td", "ID User");

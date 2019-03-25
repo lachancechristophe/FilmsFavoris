@@ -14,6 +14,7 @@ class Signup extends Page
             $this->doc .= parent::topNav(); 
 
             $this->signUpCheck();
+            
             $this->doc .= $this->formSignUp();
 
             $this->doc .= parent::endBal("body");
@@ -23,8 +24,10 @@ class Signup extends Page
     function formSignUp()
     {
         $form ='<form class="signUp" action="signup.php" method="POST" >
-            <input type="text" name="uid" placeholder="Username">
-            <input type="password" name="pwd" placeholder="password">
+            <label for="username">username :</label></br>
+            <input type="text" name="uid" placeholder="Username"></br>
+            <label for="password">password :</label></br>
+            <input type="password" name="pwd" placeholder="password"></br>
             <button type="submit" name="submit">Sign up</button>
             <input name= "f_id" type="hidden" value="signup">
             </form>';
@@ -104,7 +107,8 @@ class Signup extends Page
                         $hashedPwd = password_hash($pwd,PASSWORD_DEFAULT);
 
 
-                        $sql= $pdo->prepare("INSERT INTO public.movie_user (username, hashed_password) VALUES (:uid,:hashedPwd)");
+                        $sql= $pdo->prepare("INSERT INTO public.movie_user (username, hashed_password)
+                         VALUES (:uid,:hashedPwd)");
                         
                         $sql->bindParam(':uid', $uid);
                         $sql->bindParam(':hashedPwd', $hashedPwd);
