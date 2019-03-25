@@ -13,7 +13,7 @@
             
             $this->doc .= parent::topNav(); 
 
-            $this->doc .='<div><h1>Bienvenu utilisateur '.$this->user.'</h1></div>';
+            $this->doc .='<div><h1>Bienvenu '.$this->user.'</h1></div>';
         
             $this->doc .= parent::endBal("body");
             $this->doc .= parent::endBal("html");
@@ -23,12 +23,12 @@
         {
             if(isset($_SESSION['user_id']))
             {
-                $this->user = $_SESSION['user_id'];
+                $this->user = $_SESSION['user_name'];
                  
             }
             else{
                 
-                $this->user = "de l'espace";
+                $this->user = "utilisateur de l'espace";
             }
             
             
