@@ -4,9 +4,9 @@ class ShowFavorite extends Page {
     public function __construct(){
         $conn = new Connection();
         $pdo = $conn->getPDO();
-        $query = "SELECT * FROM favorite_movie";
+        $query = "SELECT * FROM favorite_movie ";
+        $query .= " INNER JOIN movie ON favorite_movie.movie_id=movie.id";
         $favoriteList = $pdo->query($query);
-        
         
         $this->doc = parent::initHTML("Show Favorite",'');
             
@@ -26,6 +26,9 @@ class ShowFavorite extends Page {
 
         $retStr .= parent::beginEndBal("td", "ID User");
         $retStr .= parent::beginEndBal("td", "ID Movie");
+        $retStr .= parent::beginEndBal("td", "Name");
+        $retStr .= parent::beginEndBal("td", "Producer");
+        $retStr .= parent::beginEndBal("td", "Date");
         
         
 
@@ -36,6 +39,9 @@ class ShowFavorite extends Page {
 
             $retStr .= parent::beginEndBal("td", $row['user_id']);
             $retStr .= parent::beginEndBal("td", $row['movie_id']);
+            $retStr .= parent::beginEndBal("td", $row['name']);
+            $retStr .= parent::beginEndBal("td", $row['producer']);
+            $retStr .= parent::beginEndBal("td", $row['release_date']);
             $retStr .= parent::endBal("tr");
         }
         $retStr .= parent::endBal("table");
