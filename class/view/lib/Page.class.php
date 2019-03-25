@@ -10,6 +10,7 @@ class Page
     public function initHTML($titre, $css)
     {
         $this->logoutcheck();
+        
         $retStr = "<!DOCTYPE html>\n";
         $retStr .= "<html lang='fr'>\n";
         $retStr .= "<head>\n";
@@ -27,12 +28,17 @@ class Page
     public function topNav()
     {
         $topNav = '';
-        $topNav .= '<ul class="topNav">';
+        $topNav .= '<div class="topNav">';
+        $topNav .='<img class="logo"src="style/img/logo.jpg" alt="logo" height="82" width="82">
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <nav>';
+        $topNav .= '<ul>';
         $topNav .= '<li><a href="index.php">Accueil</a></li>';
         $topNav .= '<li><a href="signup.php">Signup</a></li>';
         $topNav .= '<li><a href="show_movies.php">Show Movies</a></li>';
         $topNav .= '<li><a href="show_users.php">Show Users</a></li>';
         $topNav .= '<li><a href="show_favorites.php">Show Favorites</a></li>';
+        
         if(isset($_SESSION['user_id']))
         {
             $topNav .= '<li><form class="logout" method="POST">
@@ -45,7 +51,8 @@ class Page
             $topNav .= '<li><a href="login.php">Login</a></li>';
             
         }
-        $topNav .= '</ul>';
+        $topNav .= '</ul></nav>';
+        $topNav .= '</div>';
         return $topNav;
     }
     public function logoutCheck()

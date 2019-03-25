@@ -12,7 +12,8 @@
             
             
             $this->doc .= parent::topNav(); 
-            $this->doc .='<h1>Bienvenu utilisateur '.$this->user.'</h1>';
+
+            $this->doc .='<div><h1>Bienvenu utilisateur '.$this->user.'</h1></div>';
         
             $this->doc .= parent::endBal("body");
             $this->doc .= parent::endBal("html");
