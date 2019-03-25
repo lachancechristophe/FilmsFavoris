@@ -2,17 +2,23 @@
 class ShowFavorite extends Page {
     private $favoriteList = [];
     public function __construct(){
+        $this->doc = parent::initHTML("Show Favorite",'');
+
+        $this->doc .= parent::topNav(); 
+
+        if(empty($_SESSION['user_id'])){
+            $this->doc .= parent::beginEndBal("p", "Il faut etre connecté pour voir les favoris.");
+            $this->doc .= parent::endBal("body");
+            $this->doc .= parent::endBal("html");
+            return;
+        }
+
         $conn = new Connection();
         $pdo = $conn->getPDO();
         $query = "SELECT * FROM favorite_movie ";
-        $query .= " INNER JOIN movie ON favorite_movie.movie_id=movie.id";
+        $query .= "INNER JOIN movie ON favorite_movie.movie_id=movie.id ";
+        $query .= "WHERE user_id = " . $_SESSION['user_id'];
         $favoriteList = $pdo->query($query);
-        
-        $this->doc = parent::initHTML("Show Favorite",'');
-            
-            
-        $this->doc .= parent::topNav(); 
-
         $this->createFormatted($favoriteList);
         
         $this->doc .= parent::endBal("body");
