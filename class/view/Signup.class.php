@@ -24,10 +24,10 @@ class Signup extends Page
     function formSignUp()
     {
         $form ='<form class="signUp" action="signup.php" method="POST" >
-            <label for="username">username :</label></br>
-            <input type="text" name="uid" placeholder="Username"></br>
-            <label for="password">password :</label></br>
-            <input type="password" name="pwd" placeholder="password"></br>
+            <label>username :</label><br>
+            <input type="text" name="uid" placeholder="Username"><br>
+            <label>password :</label><br>
+            <input type="password" name="pwd" placeholder="password"><br>
             <button type="submit" name="submit">Sign up</button>
             <input name= "f_id" type="hidden" value="signup">
             </form>';
