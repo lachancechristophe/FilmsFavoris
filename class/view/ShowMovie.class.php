@@ -50,9 +50,9 @@ class ShowMovie extends Page {
 
         foreach ($stmt as $row) {
             $retStr .= parent::beginBal("tr");
-
-            $retStr .= parent::beginEndBal("td", $row['id']);
-            $retStr .= parent::beginEndBal("td", $row['name']);
+            $lienDetail = 'detail_movie.php?movie_id='.$row['id'].'';
+            $retStr .= parent::beginEndBal("td",$row['id']);
+            $retStr .= parent::beginEndBal("td", parent::createLink($lienDetail,$row['name']));
             $retStr .= parent::beginEndBal("td", $row['producer']);
             $retStr .= parent::beginEndBal("td", $row['release_date']);
             $lienFavoriter = "show_movies.php?movie_id=" . $row['id'] . "&favorite=true";
