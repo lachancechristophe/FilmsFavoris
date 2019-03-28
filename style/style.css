@@ -8,10 +8,10 @@ body {
     
 }
 /*link*/
-table a:visited{
+td a:visited{
   color:#ffe680;
 }
-a:link{
+td a:link{
 
   color:#ffe680;
 }

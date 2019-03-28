@@ -5,7 +5,7 @@ class Signup extends Page
 {
 
     
-    function __construct()
+    public function __construct()
     {
         
             $this->doc = parent::initHTML("Signup",'');
@@ -21,7 +21,7 @@ class Signup extends Page
             $this->doc .= parent::endBal("html");
         
     }
-    function formSignUp()
+    protected function formSignUp()
     {
         $form ='<form class="signUp" action="signup.php" method="POST" >
             <label>username :</label><br>

@@ -52,13 +52,13 @@
             }
             else
             {
-                $src='style/img/movie_cover/Default_movie_cover.png" alt="Cover" height="244" width="200';
+                $src='style/img/movie_cover/Default_movie_cover.png" alt="Cover"';
 
             }
             
             
             $this->doc .= '<h1>Film Detail</h1>';
-            $this->doc .= '<img src="'.$src.'">';
+            $this->doc .= '<img src="'.$src.'" height="244" width="200">';
 
         }
         public function TEST()
