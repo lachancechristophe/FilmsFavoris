@@ -7,9 +7,9 @@ class Addmovie extends Page
     
     public function __construct()
     {
-        $this->checkAddMovieInfo();
 
-        $this->checkAddMovieCover();
+        $this->verifAddMovie();
+        
 
         $this->doc = parent::initHTML("Add Movie",'');
 
@@ -48,13 +48,6 @@ class Addmovie extends Page
         {   
             $type = $_FILES['cover']['type'];
             $size = $_FILES['cover']['size']; 
-            $file_tmp = $_FILES['cover']['tmp_name']; 
-            
-            $upload_folder = 'style/img/movie_cover/';
-
-            
-            
-            
 
             if($type != 'image/png' && $type != 'image/jpeg')
             {
@@ -71,16 +64,10 @@ class Addmovie extends Page
                 }
                 else
                 {
-                    $conn = new Connection();
-                    $pdo = $conn->getPDO();
-                    $pdo->querry("SELECT COUNT(*) FROM  movie as number");
-
-
-                    $file_name = $row['count'];
-
-
-                    $movefile = move_uploaded_file($file_tmp,$upload_folder .$file_name."_movie_cover.png");
-
+                    return true;
+                    /*
+                    
+                    */
                 }
 
             }
@@ -120,23 +107,62 @@ class Addmovie extends Page
 
             else
             {
-                $conn = new Connection();
-                $pdo = $conn->getPDO();
-
-                $sql= $pdo->prepare("INSERT INTO public.movie (name, producer, release_date)
-                VALUES (:name,:producer,:date)");
+                return true;
                 
-                $sql->bindParam(':name', $name);
-                $sql->bindParam(':producer', $producer);
-                $sql->bindParam(':date', $date);
-
-                $sql->execute();
-
-                header("location:Add_movie.php?Addmovie=Sucsess");
-                exit(); 
                 
 
             }
+
+        }
+              
+    }
+    protected function verifAddMovie()
+    {
+        $boolVerifInfo= $this->checkAddMovieInfo();
+
+        $boolVerifCover = $this->checkAddMovieCover();
+
+        if (!$boolVerifCover && !$boolVerifInfo )
+        {
+            echo 'no';
+        }
+        else
+        {
+            $conn = new Connection();
+            $pdo = $conn->getPDO();
+
+            $sql = $pdo->prepare("INSERT INTO public.movie (name, producer, release_date)
+            VALUES (:name,:producer,:date)");
+            
+            $sql->bindParam(':name', $name);
+            $sql->bindParam(':producer', $producer);
+            $sql->bindParam(':date', $date);
+
+            $sql->execute();
+
+            $stmt = $pdo->query("SELECT COUNT(*) FROM  movie as number");
+        
+         
+            $row = $stmt->fetch();
+            
+
+            $file_tmp = $_FILES['cover']['tmp_name']; 
+            
+            $upload_folder = 'style/img/movie_cover/';
+
+            $file_name = $row['count'];
+
+
+            $movefile = move_uploaded_file($file_tmp,$upload_folder .$file_name."_movie_cover.png");
+            
+
+
+
+
+            
+            header("location:Add_movie.php?Addmovie=Sucsess");
+            exit(); 
+
 
         }
               
