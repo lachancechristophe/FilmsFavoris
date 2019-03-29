@@ -26,6 +26,8 @@ class Signup extends Page
         $form ='<form class="signUp" action="signup.php" method="POST" >
             <label>username :</label><br>
             <input type="text" name="uid" placeholder="Username"><br>
+            <label>email :</label><br>
+            <input type="email" name="email" placeholder="Email address"><br>
             <label>password :</label><br>
             <input type="password" name="pwd" placeholder="password"><br>
             <button type="submit" name="submit">Sign up</button>
@@ -45,6 +47,7 @@ class Signup extends Page
 
             $uidpg= pg_escape_string($_REQUEST['uid']);
             $pwdpg = pg_escape_string($_REQUEST['pwd']);
+            $emlpg = pg_escape_string($_REQUEST['email']);
 
 
 
@@ -52,7 +55,7 @@ class Signup extends Page
             
             $uid = htmlspecialchars($uidpg);
             $pwd = htmlspecialchars($pwdpg);
-
+            $eml = htmlspecialchars($emlpg);
 
 
 
@@ -72,7 +75,7 @@ class Signup extends Page
             {
 
 
-                if(empty($uid) ||empty($pwd))
+                if(empty($uid) ||empty($pwd) ||empty($eml))
                 {
 
                     //echo "<script>alert('empty')/script>";
@@ -103,19 +106,38 @@ class Signup extends Page
                     }
                     else
                     {
-                        //hasshing
+                        //hashing
                         $hashedPwd = password_hash($pwd,PASSWORD_DEFAULT);
 
-
-                        $sql= $pdo->prepare("INSERT INTO public.movie_user (username, hashed_password)
-                        VALUES (:uid,:hashedPwd)");
+                        $query = "INSERT INTO public.movie_user (username, hashed_password, email, confirmed)";
+                        $query .= "VALUES (:uid,:hashedPwd, :eml, False)";
+                        $sql= $pdo->prepare($query);
                         
                         $sql->bindParam(':uid', $uid);
+                        $sql->bindParam(':eml', $eml);
                         $sql->bindParam(':hashedPwd', $hashedPwd);
 
                         $sql->execute();
 
-                        header("location:signup.php?signUp=Sucsess");
+                        $confirmcode = substr(md5(rand()), 0, 7);
+                        $query = "INSERT INTO public.movie_user_confirm (user_id, confirm_code, confirmed)";
+                        $query .= "VALUES (:uid,:confirmcode, :false)";
+                        $sql= $pdo->prepare($query);
+
+                        echo $query . "\n";
+                        echo $pdo->lastInsertId() . "\n";
+                        echo $confirmcode . "\n";
+
+                        $false = "False";
+                        $sql->bindParam(':uid', $pdo->lastInsertId());
+                        $sql->bindParam(':confirmcode', $confirmcode);
+                        $sql->bindParam(':false', $false);
+
+                        $sql->execute();
+
+                        mail($eml, "Confirmation Films Favoris", "Entrer ce code : " . $confirmcode);
+
+                        header("location:signup.php?signUp=Success");
                         exit(); 
                     }  
 
