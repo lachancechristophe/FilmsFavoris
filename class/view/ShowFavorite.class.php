@@ -44,11 +44,12 @@ class ShowFavorite extends Page {
         foreach ($stmt as $row) {
 
             $lienDeleteFav = 'show_favorites.php?movie_id='.$row['id'].'&del_fav=true';
+            $lienDetail = 'detail_movie.php?movie_id='.$row['id'].'';
 
             $retStr .= parent::beginBal("tr");
             $retStr .= parent::beginEndBal("td", $row['user_id']);
             $retStr .= parent::beginEndBal("td", $row['movie_id']);
-            $retStr .= parent::beginEndBal("td", $row['name']);
+            $retStr .= parent::beginEndBal("td", parent::createLink($lienDetail,$row['name']));
             $retStr .= parent::beginEndBal("td", $row['producer']);
             $retStr .= parent::beginEndBal("td", $row['release_date']);
             $retStr .= parent::beginEndBal("td", parent::createLink($lienDeleteFav, 'Delete Favorite'));
