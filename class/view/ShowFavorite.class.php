@@ -53,7 +53,6 @@ class ShowFavorite extends Page {
             $coverUrl = 'style/img/movie_cover/' . $row['id'] . '_movie_cover.png';
             if(file_exists($coverUrl))
             {
-                echo 'OK!';
                 $src = $coverUrl; 
             } else {
                 $src = 'style/img/movie_cover/Default_movie_cover.png';
