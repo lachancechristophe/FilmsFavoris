@@ -1,26 +1,18 @@
 <?php
-
-
 class Addmovie extends Page 
 {
-
     
     protected $name;
     protected $producer;
     protected $date;
-
     
-
     public function __construct()
     {
         $this->doc = parent::initHTML("Add Movie",'');
-
-
         $this->doc .= parent::topNav(); 
         
         $this->doc .= $this->formAddMovie();
         $this->verifAddMovie();
-
         $this->doc .= parent::endBal("body");
         $this->doc .= parent::endBal("html");
         
@@ -38,7 +30,6 @@ class Addmovie extends Page
             <input type="text" name="date" placeholder="date"><br><br>
             <button type="submit" name="submit">Sign Movie</button>
             <input name = "add_movie" type="hidden" value="add_movie">
-
             </form>';
         return $form;
         
@@ -52,7 +43,6 @@ class Addmovie extends Page
         {   
             $type = $_FILES['cover']['type'];
             $size = $_FILES['cover']['size']; 
-
             if($type != 'image/png' && $type != 'image/jpeg')
             {
                 header("location: add_movie.php?Cover=WrongType$type");
@@ -69,13 +59,11 @@ class Addmovie extends Page
                 {
                     return true;
                 }
-
             }
             if ($movefile)
             {
               header("location: add_movie.php?upload=Sucess");
             }
-
         }
     }
     protected function setInfoMovie()
@@ -107,11 +95,8 @@ class Addmovie extends Page
     }
     protected function verifAddMovie()
     {
-
         $boolVerifInfo= $this->checkAddMovieInfo();
-
         $boolVerifCover = $this->checkAddMovieCover();
-
         if (!$boolVerifCover && !$boolVerifInfo )
         {
             
@@ -121,34 +106,26 @@ class Addmovie extends Page
             /*info*/
             $conn = new Connection();
             $pdo = $conn->getPDO();
-
             $sql = $pdo->prepare("INSERT INTO public.movie (name, producer, release_date)
             VALUES (:name,:producer,:date)");
             
             $sql->bindParam(':name', $this->$name);
             $sql->bindParam(':producer', $this->$producer);
             $sql->bindParam(':date', $this->$date);
-
             $sql->execute();
-
-
             /*cover*/
             $stmt = $pdo->query("SELECT COUNT(*) FROM  movie as number");
         
          
             $row = $stmt->fetch();
             
-
             $file_tmp = $_FILES['cover']['tmp_name']; 
             $upload_folder = 'style/img/movie_cover/';
             $file_name = $row['count'];
-
             $movefile = move_uploaded_file($file_tmp,$upload_folder .$file_name."_movie_cover.png");
-
             header("location:Add_movie.php?Addmovie=Sucsess");
             exit(); 
         }
               
     }
-
 }

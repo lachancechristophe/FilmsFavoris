@@ -44,30 +44,26 @@
                 $coverUrl.='';
             }
             $coverUrl.='_movie_cover.png';
-
+            echo $coverUrl;
             if(file_exists($coverUrl))
             {
-                $src=$coverUrl;
 
+                $src = $coverUrl;
+                $src .= '"';
+            
             }
             else
             {
-                $src='style/img/movie_cover/Default_movie_cover.png" alt="Cover"';
+                $src ='style/img/movie_cover/Default_movie_cover.png" alt="Cover" width="475" height="360"';
 
             }
             
             
             $this->doc .= '<h1>Film Detail</h1>';
-            $this->doc .= '<img src="'.$src.'" height="244" width="200">';
+            $this->doc .= '<img src="'.$src.' >';
 
         }
-        public function TEST()
-        {
-            if(!empty($_REQUEST['movie_id']))
-            {
-                $this->doc .= $_REQUEST['movie_id'];
-            }
-        }
+        
         
 
 
