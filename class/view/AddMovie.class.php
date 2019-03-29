@@ -8,11 +8,12 @@ class Addmovie extends Page
     
     public function __construct()
     {
+        $this->verifAddMovie();
         $this->doc = parent::initHTML("Add Movie",'');
         $this->doc .= parent::topNav(); 
         
         $this->doc .= $this->formAddMovie();
-        $this->verifAddMovie();
+        
         $this->doc .= parent::endBal("body");
         $this->doc .= parent::endBal("html");
         
@@ -72,16 +73,20 @@ class Addmovie extends Page
         $producerpg = pg_escape_string($_REQUEST['producer']);
         $datepg = pg_escape_string($_REQUEST['date']);
         
-        $this->$name = htmlspecialchars($namepg);
-        $this->$producer = htmlspecialchars($producerpg);
-        $this->$date = htmlspecialchars($datepg);  
+
+
+        $this->name = htmlspecialchars($namepg);
+        $this->producer = htmlspecialchars($producerpg);
+        $this->date = htmlspecialchars($datepg);  
+
+
     }
     protected function checkAddMovieInfo()
     {
         if (isset($_POST['add_movie']))
         {   
             $this->setInfoMovie();
-            if(empty($this->$name) || empty($this->$producer) || empty($this->$date))
+            if(empty($this->name) || empty($this->producer) || empty($this->date))
             {  
                 header("location:Add_movie.php?Addmovie=empty");
                 exit(); 
@@ -104,14 +109,20 @@ class Addmovie extends Page
         else
         {
             /*info*/
+            $this->setInfoMovie();
+
             $conn = new Connection();
             $pdo = $conn->getPDO();
-            $sql = $pdo->prepare("INSERT INTO public.movie (name, producer, release_date)
-            VALUES (:name,:producer,:date)");
+
+            $querry = "INSERT INTO public.movie (name, producer, release_date)";
+            $querry .= " VALUES (:name,:producer,:date)";
+
+            $sql = $pdo->prepare($querry);
+           
             
-            $sql->bindParam(':name', $this->$name);
-            $sql->bindParam(':producer', $this->$producer);
-            $sql->bindParam(':date', $this->$date);
+            $sql->bindParam(':name', $this->name);
+            $sql->bindParam(':producer', $this->producer);
+            $sql->bindParam(':date', $this->date);
             $sql->execute();
             /*cover*/
             $stmt = $pdo->query("SELECT COUNT(*) FROM  movie as number");

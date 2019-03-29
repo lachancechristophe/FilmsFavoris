@@ -29,7 +29,7 @@ class Page
     {
         $topNav = '';
         $topNav .= '<div class="topNav">';
-        $topNav .='<img class="logo" src="style/img/logo.jpg" alt="logo" height="82" width="82">
+        $topNav .='<img class="logo" src="style/img/logo.png" alt="logo" height="82" width="82">
         <input type="checkbox" id="nav-toggle" class="nav-toggle">
         <nav>';
         $topNav .= '<ul>';
@@ -88,13 +88,26 @@ class Page
     }
     public function beginForm($method, $action, $name)
     {
-        return "<form method='" . $method . "' action='" . $action . "' name='" . $name . "' >\n";
+        if($action == "")
+        {
+            return "<form method='" . $method . "' name='" . $name . "' >\n";
+        } else {
+            return "<form method='" . $method . "' action='" . $action . "' name='" . $name . "' >\n";
+        }
+        
+    }
+
+    public function endForm()
+    {
+        return "</form>";
+        
     }
 
     public function insertInput($type, $name, $humantext)
     {
+
         $retStr = "<p><label for='" . $name . "'>" . $humantext . "</label><br/>";
-        return $retStr . "<input name='" . $name . "' type='" . $type . "' value='' /> </p>";
+        return $retStr . "<input name='" . $name . "' type='" . $type . "' id='" . $name . "' value='' /> </p>";
     }
 
     public function insertInputWithValue($type, $name, $humantext, $value)
