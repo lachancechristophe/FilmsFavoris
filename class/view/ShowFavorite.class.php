@@ -32,6 +32,7 @@ class ShowFavorite extends Page {
 
         $retStr .= parent::beginEndBal("td", "ID User");
         $retStr .= parent::beginEndBal("td", "ID Movie");
+        $retStr .= parent::beginEndBal("td", "Couverture");
         $retStr .= parent::beginEndBal("td", "Name");
         $retStr .= parent::beginEndBal("td", "Producer");
         $retStr .= parent::beginEndBal("td", "Date");
