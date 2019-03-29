@@ -48,7 +48,10 @@
             {
 
                 $src = $coverUrl;
-                $src .= '"  max-height="450px"';
+                $src .= '"  style="max-height:500px;
+                max-width:500px;
+                height:auto;
+                width:auto;"';
             
             }
             else
