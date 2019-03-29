@@ -48,7 +48,7 @@
             {
 
                 $src = $coverUrl;
-                $src .= '"';
+                $src .= '"  max-height="450px"';
             
             }
             else
@@ -57,7 +57,7 @@
 
             }
             
-            
+            $this->doc .= '<h1>Movie Detail</h1>';
             $this->doc .= '<img src="'.$src.' >';
             
 
