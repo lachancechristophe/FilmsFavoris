@@ -49,6 +49,16 @@ class ShowFavorite extends Page {
             $retStr .= parent::beginBal("tr");
             $retStr .= parent::beginEndBal("td", $row['user_id']);
             $retStr .= parent::beginEndBal("td", $row['movie_id']);
+            $coverUrl = 'style/img/movie_cover/' . $row['id'] . '_movie_cover.png';
+            if(file_exists($coverUrl))
+            {
+                echo 'OK!';
+                $src = $coverUrl; 
+            } else {
+                $src = 'style/img/movie_cover/Default_movie_cover.png';
+            }
+
+            $retStr .= parent::beginEndBal("td", '<img src="' . $src . '" height="100" width="100">');
             $retStr .= parent::beginEndBal("td", parent::createLink($lienDetail,$row['name']));
             $retStr .= parent::beginEndBal("td", $row['producer']);
             $retStr .= parent::beginEndBal("td", $row['release_date']);
