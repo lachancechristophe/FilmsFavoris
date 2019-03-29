@@ -20,7 +20,8 @@ class ShowMovie extends Page {
     }
     public function makeFavorite()
     {
-        if(!empty($_REQUEST['movie_id']) && $_REQUEST['favorite'] == "true" && !empty($_SESSION['user_id'])){
+        if(!empty($_REQUEST['movie_id']) && $_REQUEST['favorite'] == "true" && !empty($_SESSION['user_id']))
+        {
 
             $conn = new Connection();
             $pdo = $conn->getPDO();
