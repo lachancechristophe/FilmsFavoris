@@ -35,22 +35,40 @@ class ShowFavorite extends Page {
         $retStr .= parent::beginEndBal("td", "Name");
         $retStr .= parent::beginEndBal("td", "Producer");
         $retStr .= parent::beginEndBal("td", "Date");
+        $retStr .= parent::beginEndBal("td", "");
         
         
 
         $retStr .= parent::endBal("tr");
 
         foreach ($stmt as $row) {
-            $retStr .= parent::beginBal("tr");
 
+            $lienDeleteFav = 'show_favorites.php?movie_id='.$row['id'].'&del_fav=true';
+
+            $retStr .= parent::beginBal("tr");
             $retStr .= parent::beginEndBal("td", $row['user_id']);
             $retStr .= parent::beginEndBal("td", $row['movie_id']);
             $retStr .= parent::beginEndBal("td", $row['name']);
             $retStr .= parent::beginEndBal("td", $row['producer']);
             $retStr .= parent::beginEndBal("td", $row['release_date']);
+            $retStr .= parent::beginEndBal("td", parent::createLink($lienDeleteFav, 'Delete Favorite'));
             $retStr .= parent::endBal("tr");
         }
         $retStr .= parent::endBal("table");
         $this->doc .= $retStr;
+    }
+
+    public function checkDeleteFavorite()
+    {
+        if (!empty($_REQUEST['movie_id']) && $_REQUEST['del_fav'] == "true" && !empty($_SESSION['user_id']))
+        {   
+            $conn = new Connection();
+            $pdo = $conn->getPDO();
+            $query = "DELETE FROM favorite_movie WHERE user_id=".$_SESSION['user_id']." AND movie_id=".$_REQUEST['movie_id'].";";
+            $pdo->query($query);
+            $this->doc .= "Favorite deleted !";
+            
+
+        }
     }
 }
