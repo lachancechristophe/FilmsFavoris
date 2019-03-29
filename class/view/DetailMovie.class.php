@@ -25,7 +25,7 @@
             }
             else
             {
-                $this->doc .= '<h1>connecter vous</h1>';
+                $this->doc .= '<h1>Veuillez vous connecter pour accéder aux détails des films!</h1>';
             }
             
             

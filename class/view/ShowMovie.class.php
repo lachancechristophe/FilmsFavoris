@@ -41,17 +41,29 @@ class ShowMovie extends Page {
         $retStr .=parent::beginBal("tr");
 
         $retStr .= parent::beginEndBal("td", "ID");
+        $retStr .= parent::beginEndBal("td", "Couverture");
         $retStr .= parent::beginEndBal("td", "Name");
         $retStr .= parent::beginEndBal("td", "Producer");
         $retStr .= parent::beginEndBal("td", "Date");
         $retStr .= parent::beginEndBal("td", "Favorite");
 
         $retStr .= parent::endBal("tr");
+        
 
         foreach ($stmt as $row) {
             $retStr .= parent::beginBal("tr");
             $lienDetail = 'detail_movie.php?movie_id='.$row['id'].'';
             $retStr .= parent::beginEndBal("td",$row['id']);
+            $coverUrl = 'style/img/movie_cover/' . $row['id'] . '_movie_cover.png';
+            if(file_exists($coverUrl))
+            {
+                echo 'OK!';
+                $src = $coverUrl; 
+            } else {
+                $src = 'style/img/movie_cover/Default_movie_cover.png';
+            }
+
+            $retStr .= parent::beginEndBal("td", '<img src="' . $src . '" height="100" width="100">');
             $retStr .= parent::beginEndBal("td", parent::createLink($lienDetail,$row['name']));
             $retStr .= parent::beginEndBal("td", $row['producer']);
             $retStr .= parent::beginEndBal("td", $row['release_date']);
