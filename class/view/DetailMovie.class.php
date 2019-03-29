@@ -44,7 +44,7 @@
                 $coverUrl.='';
             }
             $coverUrl.='_movie_cover.png';
-            echo $coverUrl;
+            
             if(file_exists($coverUrl))
             {
 
