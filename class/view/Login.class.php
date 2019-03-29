@@ -16,6 +16,7 @@ class Login extends Page
         $this->doc .= parent::insertInput("text","username","username :");
         $this->doc .= parent::insertInput("password","password","password :");
         $this->doc .= parent::insertInputWithValue("submit","btn-submit","","Valider");
+        $this->doc .= parent::endForm();
         
         $this->doc .= parent::endBal("body");
         $this->doc .= parent::endBal("html");
