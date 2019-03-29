@@ -8,8 +8,6 @@
 
             $this->doc = parent::initHTML("Detail Movie",'');
 
-            
-            
             $this->doc .= parent::topNav(); 
 
             $this->connectVerif();
@@ -22,7 +20,8 @@
         {
             if(isset($_SESSION['user_id']))
             {
-                $this->coverDetail(); 
+                $this->coverDetailImage(); 
+                $this->coverDetailInfo();
             }
             else
             {
@@ -31,7 +30,7 @@
             
             
         }
-        public function coverDetail()
+        public function coverDetailImage()
         {
             
             $coverUrl = 'style/img/movie_cover/';
@@ -59,8 +58,24 @@
             }
             
             
-            $this->doc .= '<h1>Film Detail</h1>';
             $this->doc .= '<img src="'.$src.' >';
+            
+
+        }
+        public function coverDetailInfo()
+        {
+            
+            $conn = new Connection();
+            $pdo = $conn->getPDO();
+
+            $stmt = $pdo->query("SELECT * FROM movie");
+            $row = $stmt->fetch();
+
+            $this->doc .= '<h1>'.$row['name'].'</h1>';
+            $this->doc .= '<h1>'.$row['producer'].'</h1>';
+            $this->doc .= '<h1>'.$row['release_date'].'</h1>';
+
+
 
         }
         

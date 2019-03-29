@@ -113,8 +113,12 @@ class Addmovie extends Page
 
             $conn = new Connection();
             $pdo = $conn->getPDO();
-            $sql = $pdo->prepare("INSERT INTO public.movie (name, producer, release_date)
-            VALUES (:name,:producer,:date)");
+
+            $querry = "INSERT INTO public.movie (name, producer, release_date)";
+            $querry .= " VALUES (:name,:producer,:date)";
+
+            $sql = $pdo->prepare($querry);
+           
             
             $sql->bindParam(':name', $this->name);
             $sql->bindParam(':producer', $this->producer);
