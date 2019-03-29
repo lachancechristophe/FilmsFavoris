@@ -5,18 +5,22 @@ class Addmovie extends Page
 {
 
     
+    protected $name;
+    protected $producer;
+    protected $date;
+
+    
+
     public function __construct()
     {
-
-        $this->verifAddMovie();
-        
-
         $this->doc = parent::initHTML("Add Movie",'');
 
 
         $this->doc .= parent::topNav(); 
         
         $this->doc .= $this->formAddMovie();
+        $this->verifAddMovie();
+
         $this->doc .= parent::endBal("body");
         $this->doc .= parent::endBal("html");
         
@@ -44,7 +48,7 @@ class Addmovie extends Page
    
     protected function checkAddMovieCover()
     {
-        if (isset( $_POST['add_movie']))
+        if (isset($_POST['add_movie']))
         {   
             $type = $_FILES['cover']['type'];
             $size = $_FILES['cover']['size']; 
@@ -58,16 +62,12 @@ class Addmovie extends Page
             {
                 if($size > 1000000)
                 {
-                   header("location: add_movie.php?Cover=SizeTooBig");
+                    header("location: add_movie.php?Cover=SizeTooBig");
                     exit();  
-
                 }
                 else
                 {
                     return true;
-                    /*
-                    
-                    */
                 }
 
             }
@@ -78,68 +78,61 @@ class Addmovie extends Page
 
         }
     }
+    protected function setInfoMovie()
+    {
+        $namepg = pg_escape_string($_REQUEST['name']);
+        $producerpg = pg_escape_string($_REQUEST['producer']);
+        $datepg = pg_escape_string($_REQUEST['date']);
+        
+        $this->$name = htmlspecialchars($namepg);
+        $this->$producer = htmlspecialchars($producerpg);
+        $this->$date = htmlspecialchars($datepg);  
+    }
     protected function checkAddMovieInfo()
     {
-        if (isset( $_POST['add_movie']))
+        if (isset($_POST['add_movie']))
         {   
-
-            $namepg= pg_escape_string($_REQUEST['name']);
-            $producerpg = pg_escape_string($_REQUEST['producer']);
-            $datepg = pg_escape_string($_REQUEST['date']);
-            
-            $name = htmlspecialchars($namepg);
-            $producer = htmlspecialchars($producerpg);
-            $date = htmlspecialchars($datepg);
-            
-
-
-
-
-
-            if(empty($name) || empty($producer) || empty($date))
-            {
-
-               
+            $this->setInfoMovie();
+            if(empty($this->$name) || empty($this->$producer) || empty($this->$date))
+            {  
                 header("location:Add_movie.php?Addmovie=empty");
-
                 exit(); 
             }
-
             else
             {
                 return true;
-                
-                
-
             }
-
         }
               
     }
     protected function verifAddMovie()
     {
+
         $boolVerifInfo= $this->checkAddMovieInfo();
 
         $boolVerifCover = $this->checkAddMovieCover();
 
         if (!$boolVerifCover && !$boolVerifInfo )
         {
-            echo 'no';
+            
         }
         else
         {
+            /*info*/
             $conn = new Connection();
             $pdo = $conn->getPDO();
 
             $sql = $pdo->prepare("INSERT INTO public.movie (name, producer, release_date)
             VALUES (:name,:producer,:date)");
             
-            $sql->bindParam(':name', $name);
-            $sql->bindParam(':producer', $producer);
-            $sql->bindParam(':date', $date);
+            $sql->bindParam(':name', $this->$name);
+            $sql->bindParam(':producer', $this->$producer);
+            $sql->bindParam(':date', $this->$date);
 
             $sql->execute();
 
+
+            /*cover*/
             $stmt = $pdo->query("SELECT COUNT(*) FROM  movie as number");
         
          
@@ -147,24 +140,15 @@ class Addmovie extends Page
             
 
             $file_tmp = $_FILES['cover']['tmp_name']; 
-            
             $upload_folder = 'style/img/movie_cover/';
-
             $file_name = $row['count'];
 
-
             $movefile = move_uploaded_file($file_tmp,$upload_folder .$file_name."_movie_cover.png");
-            
 
-
-
-
-            
             header("location:Add_movie.php?Addmovie=Sucsess");
             exit(); 
-
-
         }
               
     }
+
 }
