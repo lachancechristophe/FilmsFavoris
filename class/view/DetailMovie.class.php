@@ -68,7 +68,7 @@
             $conn = new Connection();
             $pdo = $conn->getPDO();
 
-            $stmt = $pdo->query("SELECT * FROM movie");
+            $stmt = $pdo->query("SELECT * FROM movie WHERE id=".$_REQUEST['movie_id']);
             $row = $stmt->fetch();
 
             $this->doc .= '<h1>'.$row['name'].'</h1>';
