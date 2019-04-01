@@ -54,6 +54,7 @@ class Addmovie extends Page
                 if($size > 1000000)
                 {
                     header("location: add_movie.php?Cover=SizeTooBig");
+                    $this->doc .= '<a>photo trop grosse</a>';
                     exit();  
                 }
                 else
