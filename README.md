@@ -10,3 +10,8 @@ ALTER TABLE
 --ONLY
 public.movie_user
 ADD email varchar(255)
+
+ALTER TABLE
+--ONLY
+public.movie_user
+ADD confirmed boolean
