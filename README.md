@@ -6,3 +6,7 @@ CREATE TABLE movie_user_confirm (
     confirm_code varchar,
     confirmed boolean
 )
+ALTER TABLE
+--ONLY
+public.movie_user
+ADD email varchar(255)
