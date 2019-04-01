@@ -29,8 +29,8 @@ class Page
     {
         $topNav = '';
         $topNav .= '<div class="topNav">';
-        $topNav .='<img class="logo" src="style/img/logo.png" alt="logo" height="82" width="82">
-        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        $topNav .='<div><a class = "logoLink" href="index.php"><img class="logo" src="style/img/logo.png" alt="logo" height="82" width="82"></a>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle"></div>
         <nav>';
         $topNav .= '<ul>';
         $topNav .= '<li><a href="index.php">Accueil</a></li>';

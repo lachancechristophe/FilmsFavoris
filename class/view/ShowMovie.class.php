@@ -1,7 +1,9 @@
 <?php
-class ShowMovie extends Page {
+class ShowMovie extends Page 
+{
     private $moviesList = [];
-    public function __construct(){
+    public function __construct()
+    {
         $conn = new Connection();
         $pdo = $conn->getPDO();
         $query = "SELECT * FROM movie";
