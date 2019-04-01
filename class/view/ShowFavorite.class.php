@@ -1,4 +1,6 @@
 <?php
+namespace FilmFavoris;
+
 class ShowFavorite extends Page {
     private $favoriteList = [];
     public function __construct(){

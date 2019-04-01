@@ -1,5 +1,5 @@
 <?php
-
+namespace FilmFavoris;
 
 class Signup extends Page 
 {

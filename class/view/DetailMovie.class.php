@@ -1,4 +1,5 @@
 <?php
+namespace FilmFavoris;
     
     class DetailMovie extends Page
     {

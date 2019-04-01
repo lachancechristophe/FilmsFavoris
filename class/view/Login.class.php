@@ -1,4 +1,5 @@
 <?php
+namespace FilmFavoris;
 
 
 class Login extends Page 
