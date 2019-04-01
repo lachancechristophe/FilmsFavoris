@@ -102,14 +102,20 @@ class ShowMovie extends Page
     {
         $conn = new Connection();
         $pdo = $conn->getPDO();
-
-        $queryCheckFav = "SELECT * FROM favorite_movie WHERE movie_id=".$movie_id." AND user_id=".$_SESSION['user_id'];
-        $list_fav = $pdo->query($queryCheckFav);
-        $row = $list_fav->fetch();
-
-        if($row > 0){
-            return true;
+        if(isset($_SESSION['user_id']))
+        {
+            $queryCheckFav = "SELECT * FROM favorite_movie WHERE movie_id=".$movie_id." AND user_id=".$_SESSION['user_id'];
+            $list_fav = $pdo->query($queryCheckFav);
+            $row = $list_fav->fetch();
+            if($row > 0){
+                return true;
+            }
         }
+        
+        
+        
+
+        
     }
 
     
