@@ -1,4 +1,6 @@
 <?php
+namespace FilmFavoris;
+
 session_start();
 
 require_once('class/view/lib/Page.class.php');

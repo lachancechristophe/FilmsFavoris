@@ -1,4 +1,6 @@
 <?php
+namespace FilmFavoris;
+
 class Page
 {
     protected $doc;

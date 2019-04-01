@@ -1,5 +1,5 @@
 <?php
-
+namespace FilmFavoris;
 
 class Confirmation extends Page 
 {

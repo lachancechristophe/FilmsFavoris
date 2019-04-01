@@ -1,4 +1,6 @@
 <?php
+namespace FilmFavoris;
+
 class ShowMovie extends Page 
 {
     private $moviesList = [];

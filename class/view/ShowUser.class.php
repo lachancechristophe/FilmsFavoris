@@ -1,4 +1,6 @@
 <?php
+namespace FilmFavoris;
+
 class ShowUser extends Page {
     private $usersList = [];
     public function __construct(){
