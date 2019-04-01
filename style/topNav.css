@@ -127,17 +127,14 @@ nav a:hover {
   
 }
 .logo{
-
+  transition: transform 1.3s;
+  transform-style: preserve-3d;
   transform: rotateY(360deg);
   
-  transform: preserve-3d;
-  transition: 0.8s;
   
-  
-  
-  
+
 }
-@media screen and (min-width: 100px) {
+@media screen and (min-width: 1080px) {
   .nav-toggle-label {
     display: none;
   }
