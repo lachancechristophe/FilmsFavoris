@@ -50,18 +50,17 @@ class Login extends Page
                 
             if($rows>0) 
             {
-                //if($data[0]->confirmed = 0)
-                echo("bat country");
+                if(!$data[0]->confirmed)
+                    $this->doc .= "You need to confirm your user account before using this website!";
                 print_r($data[0]->confirmed);
 
 
                 $passwordpg = $data[0]->hashed_password;
-                if(password_verify($mypassword,$passwordpg))
+                if(password_verify($mypassword,$passwordpg) && $data[0]->confirmed)
                 {
                     $_SESSION['user_id'] = $data[0]->id;
                     $_SESSION['user_name'] = $data[0]->username;
-                    $_SESSION['confirmed'] = $data[0]->confirmed;
-                    //header("location: index.php?Login_succes");
+                    header("location: index.php?Login_success");
                 }
                 else 
                 {
