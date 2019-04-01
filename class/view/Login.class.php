@@ -53,7 +53,6 @@ class Login extends Page
             {
                 if(!$data[0]->confirmed)
                     $this->doc .= "You need to confirm your user account before using this website!";
-                print_r($data[0]->confirmed);
 
 
                 $passwordpg = $data[0]->hashed_password;
@@ -65,7 +64,8 @@ class Login extends Page
                 }
                 else 
                 {
-                    $this->doc .= "Your Login Name or Password is invalid";
+                    if($data[0]->confirmed)
+                        $this->doc .= "Your Login Name or Password is invalid";
                 }
                 
             }

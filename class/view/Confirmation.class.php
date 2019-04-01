@@ -73,8 +73,10 @@ class Confirmation extends Page
                         $sql->bindParam(':idn', $idNumber);
                         $sql->bindParam(':conf', $conf);
                         $sql->execute();
-                    }
 
+                        $this->doc .= "Your user account has been confirmed.";
+                    }
+                
 
                 }
             }
