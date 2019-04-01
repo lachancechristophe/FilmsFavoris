@@ -49,7 +49,6 @@ class Confirmation extends Page
             $rows = count($data);
             
             foreach ($data as $row) {
-                echo $row['id'];
                 $idNumber = $row['id'];
                 
                 $sql = $pdo->prepare("SELECT * FROM public.movie_user_confirm WHERE user_id=:idn");
@@ -60,16 +59,16 @@ class Confirmation extends Page
                     if($row['confirm_code'] == $cod){
                         $conf = "True";
                         $query = "UPDATE public.movie_user_confirm";
-                        $query .= "SET confirmed=:conf";
-                        $query .= "WHERE user_id=:idn";
+                        $query .= " SET confirmed = :conf";
+                        $query .= " WHERE user_id = :idn";
                         $sql = $pdo->prepare($query );
                         $sql->bindParam(':idn', $idNumber);
                         $sql->bindParam(':conf', $conf);
                         $sql->execute();
 
                         $query = "UPDATE public.movie_user";
-                        $query .= "SET confirmed=:conf";
-                        $query .= "WHERE user_id=:idn";
+                        $query .= " SET confirmed = :conf";
+                        $query .= " WHERE id = :idn";
                         $sql = $pdo->prepare($query );
                         $sql->bindParam(':idn', $idNumber);
                         $sql->bindParam(':conf', $conf);
