@@ -80,8 +80,8 @@ class ShowFavorite extends Page {
             $query = "DELETE FROM favorite_movie WHERE user_id=";
             $query .= $_SESSION['user_id']." AND movie_id=".$_REQUEST['movie_id'];
             $pdo->query($query);
-            $this->doc .= "Favorite deleted !";
-            
+            $this->doc .= "Favorite deleted ! Refreshing in 3 sec...";
+            header("Refresh:3");
 
         }
     }

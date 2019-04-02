@@ -137,7 +137,14 @@ class Signup extends Page
 
                         $sql->execute();
 
-                        mail($eml, "Confirmation Films Favoris", "Entrer ce code : " . $confirmcode);
+                        $emailstring = "Confirmation Films Favoris\n\n";
+                        $emailstring .= "Pour confirmer votre inscription, visitez la page suivante: \n\n";
+                        $emailstring .= "/confirm_user.php\n\n";
+                        $emailstring .= "Et entrez le code suivant:\n\n";
+                        $emailstring .= $confirmcode;
+                        $emailstring .= "\n\nMerci!";
+
+                        mail($eml, "Confirmation Films Favoris", $emailstring);
 
                         header("location:signup.php?signUp=Success");
                         exit(); 

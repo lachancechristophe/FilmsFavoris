@@ -79,8 +79,14 @@ namespace FilmFavoris;
             $this->doc .= '<h1>'.$row['producer'].'</h1>';
             $this->doc .= '<h1>'.$row['release_date'].'</h1>';
 
-
-
+            $query = "SELECT (user_id) FROM favorite_movie WHERE movie_id = :movie_id ";
+            $query .= "INNER JOIN movie_user ";
+            $query .= "ON favorite_movie.user_id = movie_user=id";
+            $stmt = $pdo->prepare($query);
+            //TODO: NOT DO THIS - use naked request var
+            $stmt->bindParam(':movie_id', $_REQUEST['movie_id']);
+            $lalaland = $stmt->execute();   
+            print_r($lalaland);
         }
         
         

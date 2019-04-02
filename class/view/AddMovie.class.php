@@ -137,8 +137,7 @@ class Addmovie extends Page
             $upload_folder = 'style/img/movie_cover/';
             $file_name = $row['count'];
             $movefile = move_uploaded_file($file_tmp,$upload_folder .$file_name."_movie_cover.png");
-            header("location:Add_movie.php?Addmovie=Sucsess");
-            exit(); 
+
         }
               
     }
