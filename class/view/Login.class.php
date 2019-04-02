@@ -1,6 +1,7 @@
 <?php
 namespace FilmFavoris;
 
+use PDO;
 
 class Login extends Page 
 {

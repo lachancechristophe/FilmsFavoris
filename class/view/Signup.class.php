@@ -1,6 +1,8 @@
 <?php
 namespace FilmFavoris;
 
+use PDO;
+
 class Signup extends Page 
 {
 
