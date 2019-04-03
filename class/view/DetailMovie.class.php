@@ -81,7 +81,7 @@ namespace FilmFavoris;
 
             $query = "SELECT (user_id) FROM favorite_movie WHERE movie_id = :movie_id ";
             $query .= "INNER JOIN movie_user ";
-            $query .= "ON favorite_movie.user_id = movie_user=id";
+            $query .= "ON favorite_movie.user_id = movie_user.id";
             $stmt = $pdo->prepare($query);
             //TODO: NOT DO THIS - use naked request var
             $stmt->bindParam(':movie_id', $_REQUEST['movie_id']);
