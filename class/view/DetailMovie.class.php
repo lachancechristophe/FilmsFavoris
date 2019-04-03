@@ -49,7 +49,7 @@ namespace FilmFavoris;
             {
 
                 $src = $coverUrl;
-                $src .= '"  style="max-height:500px;
+                $src .= '"  alt = "Cover" style="max-height:500px;
                 max-width:500px;
                 height:auto;
                 width:auto;"';
