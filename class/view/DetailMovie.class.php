@@ -93,19 +93,7 @@ namespace FilmFavoris;
             }
             $this->doc .= "</ul>";
         }
-        
-        
-
-
+    
     }
-        
-        
-    
-        
-
-    
-    
-
-
 
 ?>
