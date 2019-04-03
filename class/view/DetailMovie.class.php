@@ -73,20 +73,24 @@ namespace FilmFavoris;
             $pdo = $conn->getPDO();
 
             $stmt = $pdo->query("SELECT * FROM movie WHERE id=".$_REQUEST['movie_id']);
-            $row = $stmt->fetch();
 
             $this->doc .= '<h1>'.$row['name'].'</h1>';
             $this->doc .= '<h1>'.$row['producer'].'</h1>';
             $this->doc .= '<h1>'.$row['release_date'].'</h1>';
 
-            $query = "SELECT (user_id) FROM favorite_movie WHERE movie_id = :movie_id ";
+            $query = "SELECT (username) FROM favorite_movie ";
             $query .= "INNER JOIN movie_user ";
-            $query .= "ON favorite_movie.user_id = movie_user.id";
-            $stmt = $pdo->prepare($query);
+            $query .= "ON favorite_movie.user_id = movie_user.id ";
+            $query .= "WHERE movie_id = " . $_REQUEST['movie_id'];
+            $stmt = $pdo->query($query);
             //TODO: NOT DO THIS - use naked request var
-            $stmt->bindParam(':movie_id', $_REQUEST['movie_id']);
-            $lalaland = $stmt->execute();   
-            print_r($lalaland);
+
+            $this->doc .= "<p>Utilisateurs dont ce film est favori</p>";
+            $this->doc .= "<ul>";
+            foreach($stmt as $row){
+                $this->doc .= "<li>".$row['username']."</li>";
+            }
+            $this->doc .= "</ul>";
         }
         
         

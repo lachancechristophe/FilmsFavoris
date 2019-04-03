@@ -11,22 +11,20 @@ class ShowMovie extends Page
         $query = "SELECT * FROM movie";
         $moviesList = $pdo->query($query);
         
-        $this->doc = parent::initHTML("Show Movie",'');
-            
+        $this->doc = parent::initHTML("Show Movie",''); 
             
         $this->doc .= parent::topNav(); 
-        
         
         $this->createFormatted($moviesList);
         
         $this->doc .= parent::endBal("body");
         $this->doc .= parent::endBal("html");
     }
+
     public function makeFavorite()
     {
         if(!empty($_REQUEST['movie_id']) && $_REQUEST['favorite'] == "true" && !empty($_SESSION['user_id']))
         {
-
             $conn = new Connection();
             $pdo = $conn->getPDO();
 
@@ -43,13 +41,7 @@ class ShowMovie extends Page
                 $pdo->query($query);
                 $this->doc .= "vous avez favoriter un film!";
             }
-            
-            
-        
         }
-        
-
-
     }
 
     private function createFormatted($stmt)
@@ -113,12 +105,5 @@ class ShowMovie extends Page
                 return true;
             }
         }
-        
-        
-        
-
-        
-    }
-
-    
+    }  
 }
