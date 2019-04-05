@@ -1,7 +1,7 @@
 <?php
 namespace FilmFavoris;
 
-class Addmovie extends Page
+class AddMovie extends Page
 {
     protected $name;
     protected $producer;
