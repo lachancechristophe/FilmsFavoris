@@ -1,4 +1,6 @@
 <?php
+namespace FilmsFavoris;
+
 session_start();
 include('Navigateur.php');
 //Includes génériques
