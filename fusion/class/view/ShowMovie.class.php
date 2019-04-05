@@ -58,7 +58,8 @@ class ShowMovie extends Page
         $retStr .= parent::beginEndBal("td", "Name");
         $retStr .= parent::beginEndBal("td", "Producer");
         $retStr .= parent::beginEndBal("td", "Date");
-        $retStr .= parent::beginEndBal("td", "Favorite");
+        if(!empty($_SESSION['user_id']))
+            $retStr .= parent::beginEndBal("td", "Favorite");
 
         $retStr .= parent::endBal("tr");
         
@@ -82,11 +83,13 @@ class ShowMovie extends Page
             $retStr .= parent::beginEndBal("td", parent::createLink($lienDetail, $row['name']));
             $retStr .= parent::beginEndBal("td", $row['producer']);
             $retStr .= parent::beginEndBal("td", $row['release_date']);
-            $lienFavoriter = "index.php?page=show_movie&movie_id=" . $row['id'] . "&favorite=true";
-            if ($isFav) {
-                $retStr .= parent::beginEndBal("td", "Deja favori !");
-            } else {
-                $retStr .= parent::beginEndBal("td", parent::createLink($lienFavoriter, 'Make Favorite'));
+            if(!empty($_SESSION['user_id'])){
+                $lienFavoriter = "index.php?page=show_movie&movie_id=" . $row['id'] . "&favorite=true";
+                if ($isFav) {
+                    $retStr .= parent::beginEndBal("td", "Deja favori !");
+                } else {
+                    $retStr .= parent::beginEndBal("td", parent::createLink($lienFavoriter, 'Make Favorite'));
+                }
             }
             
 
