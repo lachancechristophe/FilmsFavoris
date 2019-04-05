@@ -23,7 +23,7 @@ class Signup extends Page
     }
     protected function formSignUp()
     {
-        $form ='<form class="signUp" action="signup.php" method="POST" >
+        $form ='<form class="signUp" action="index.php?page=signup" method="POST" >
             <label>username :</label><br>
             <input type="text" name="uid" placeholder="Username"><br>
             <label>email :</label><br>
