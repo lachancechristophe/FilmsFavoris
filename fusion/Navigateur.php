@@ -14,7 +14,7 @@ class Navigateur
         switch($page){
 
             case 'detail_movie':
-                $page = new AddMovie();
+                $page = new DetailMovie();
                 break;
             case 'add_movie':
                 $page = new AddMovie();
