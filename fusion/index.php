@@ -1,5 +1,5 @@
 <?php
-namespace FilmsFavoris;
+namespace FilmFavoris;
 
 session_start();
 include('Navigateur.php');
