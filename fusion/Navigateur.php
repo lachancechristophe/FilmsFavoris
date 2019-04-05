@@ -25,6 +25,10 @@ class Navigateur
                 $page = new ShowUser();
                 break;
 
+            case 'confirm_user':
+                $page = new Confirmation();
+                break;
+
             case 'show_movie':
                 $page = new ShowMovie();
                 break;

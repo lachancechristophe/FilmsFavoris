@@ -12,6 +12,8 @@ require_once('class/view/Login.class.php');
 require_once('class/view/Signup.class.php');
 //Includes pour index.php
 require_once('class/view/Index.class.php');
+
+require_once('class/view/Confirmation.class.php');
 //Includes pour show_movies.php
 require_once('class/view/ShowMovie.class.php');
 //Includes pour show_users.php

@@ -20,7 +20,7 @@ class AddMovie extends Page
     }
     protected function formAddMovie()
     {
-        $form ='<form class="add_movie" action="add_movie.php" method="POST" enctype="multipart/form-data">
+        $form ='<form class="add_movie" action="index.php?page=add_movie" method="POST" enctype="multipart/form-data">
             <label>cover :</label><br><br>
             <input type="file" name="cover" id="cover"><br><br>
             <label>name :</label><br>
