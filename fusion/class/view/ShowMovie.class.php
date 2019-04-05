@@ -60,7 +60,7 @@ class ShowMovie extends Page
         foreach ($stmt as $row) {
             $isFav=$this->checkIfFav($row['id']);
             $retStr .= parent::beginBal("tr");
-            $lienDetail = 'detail_movie.php?movie_id='.$row['id'].'';
+            $lienDetail = 'index.php?page=detail_movie&movie_id='.$row['id'];
             $retStr .= parent::beginEndBal("td", $row['id']);
             $coverUrl = 'style/img/movie_cover/' . $row['id'] . '_movie_cover.png';
             if (file_exists($coverUrl)) {

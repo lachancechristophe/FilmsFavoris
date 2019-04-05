@@ -22,6 +22,8 @@ require_once('class/view/ShowUser.class.php');
 require_once('class/view/ShowFavorite.class.php');
 //Includes pour add_movie
 require_once('class/view/AddMovie.class.php');
+//Includes pour detail_movie
+require_once('class/view/DetailMovie.class.php');
 
 
 $navigateur = new Navigateur();
