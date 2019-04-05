@@ -6,6 +6,7 @@ class ShowFavorite extends Page
     private $favoriteList = [];
     public function __construct()
     {
+        $this->checkDeleteFavorite();
         $this->doc = parent::initHTML("Show Favorite", '');
 
         $this->doc .= parent::topNav();
@@ -47,8 +48,8 @@ class ShowFavorite extends Page
         $retStr .= parent::endBal("tr");
 
         foreach ($stmt as $row) {
-            $lienDeleteFav = 'show_favorites.php?movie_id='.$row['id'].'&del_fav=true';
-            $lienDetail = 'detail_movie.php?movie_id='.$row['id'].'';
+            $lienDeleteFav = 'index.php?page=show_favorite&movie_id='.$row['id'].'&del_fav=true';
+            $lienDetail = 'index.php?page=show_favorite&movie_id='.$row['id'].'';
 
             $retStr .= parent::beginBal("tr");
             $retStr .= parent::beginEndBal("td", $row['user_id']);

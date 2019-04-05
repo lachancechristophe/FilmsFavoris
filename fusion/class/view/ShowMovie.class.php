@@ -6,6 +6,12 @@ class ShowMovie extends Page
     private $moviesList = [];
     public function __construct()
     {
+        if(isset($_REQUEST['movie_id']))
+        {
+            $this->makeFavorite();
+        }
+        
+        
         $conn = new Connection();
         $pdo = $conn->getPDO();
         $query = "SELECT * FROM movie";
@@ -60,7 +66,10 @@ class ShowMovie extends Page
         foreach ($stmt as $row) {
             $isFav=$this->checkIfFav($row['id']);
             $retStr .= parent::beginBal("tr");
+
+            $lienDetail = 'index.php?page=show_movie&'.$row['id'].'';
             $lienDetail = 'index.php?page=detail_movie&movie_id='.$row['id'];
+
             $retStr .= parent::beginEndBal("td", $row['id']);
             $coverUrl = 'style/img/movie_cover/' . $row['id'] . '_movie_cover.png';
             if (file_exists($coverUrl)) {
@@ -73,7 +82,7 @@ class ShowMovie extends Page
             $retStr .= parent::beginEndBal("td", parent::createLink($lienDetail, $row['name']));
             $retStr .= parent::beginEndBal("td", $row['producer']);
             $retStr .= parent::beginEndBal("td", $row['release_date']);
-            $lienFavoriter = "show_movies.php?movie_id=" . $row['id'] . "&favorite=true";
+            $lienFavoriter = "index.php?page=show_movie&movie_id=" . $row['id'] . "&favorite=true";
             if ($isFav) {
                 $retStr .= parent::beginEndBal("td", "Deja favori !");
             } else {
