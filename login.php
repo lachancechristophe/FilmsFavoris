@@ -9,4 +9,3 @@ require_once('class/view/Login.class.php');
 
 $login = new Login();
 $login->showDoc();
-

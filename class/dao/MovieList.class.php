@@ -12,9 +12,8 @@ class MovieList extends RecordList
     
     // --------- Public services --------- //
 
-    public function __construct($url) 
+    public function __construct($url)
     {
-
     }
     
     // --------- Protected services --------- //
@@ -22,6 +21,4 @@ class MovieList extends RecordList
     
     
     // --------- Private services --------- //
-
-
 }

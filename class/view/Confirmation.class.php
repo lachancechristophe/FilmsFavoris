@@ -1,21 +1,17 @@
 <?php
 namespace FilmFavoris;
 
-class Confirmation extends Page 
+class Confirmation extends Page
 {
-
-    
     public function __construct()
     {
-        
-            $this->doc = parent::initHTML("Confirmation",'');
-            $this->doc .= parent::topNav();
+        $this->doc = parent::initHTML("Confirmation", '');
+        $this->doc .= parent::topNav();
             
-            $this->doc .= $this->formConfirm();
+        $this->doc .= $this->formConfirm();
 
-            $this->doc .= parent::endBal("body");
-            $this->doc .= parent::endBal("html");
-        
+        $this->doc .= parent::endBal("body");
+        $this->doc .= parent::endBal("html");
     }
     protected function formConfirm()
     {
@@ -28,11 +24,10 @@ class Confirmation extends Page
             <input name= "f_id" type="hidden" value="confirm">
             </form>';
         return $form;
-
     }
-    public function confirmUser() 
+    public function confirmUser()
     {
-        if(!empty($_REQUEST['uid']) && !empty($_REQUEST['confirmcode'])){
+        if (!empty($_REQUEST['uid']) && !empty($_REQUEST['confirmcode'])) {
             $conn = new Connection();
             $pdo = $conn->getPDO();
 
@@ -56,12 +51,12 @@ class Confirmation extends Page
                 $sql->execute();
                 $data = $sql->fetchAll();
                 foreach ($data as $row) {
-                    if($row['confirm_code'] == $cod){
+                    if ($row['confirm_code'] == $cod) {
                         $conf = "True";
                         $query = "UPDATE public.movie_user_confirm";
                         $query .= " SET confirmed = :conf";
                         $query .= " WHERE user_id = :idn";
-                        $sql = $pdo->prepare($query );
+                        $sql = $pdo->prepare($query);
                         $sql->bindParam(':idn', $idNumber);
                         $sql->bindParam(':conf', $conf);
                         $sql->execute();
@@ -69,15 +64,13 @@ class Confirmation extends Page
                         $query = "UPDATE public.movie_user";
                         $query .= " SET confirmed = :conf";
                         $query .= " WHERE id = :idn";
-                        $sql = $pdo->prepare($query );
+                        $sql = $pdo->prepare($query);
                         $sql->bindParam(':idn', $idNumber);
                         $sql->bindParam(':conf', $conf);
                         $sql->execute();
 
                         $this->doc .= "Your user account has been confirmed.";
                     }
-                
-
                 }
             }
         }

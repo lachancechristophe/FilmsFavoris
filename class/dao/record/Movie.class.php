@@ -18,9 +18,8 @@ class Movie extends Record
     
     // --------- Public services --------- //
 
-    public function __construct($url) 
+    public function __construct($url)
     {
-
     }
     
     // --------- Protected services --------- //
@@ -28,7 +27,4 @@ class Movie extends Record
     
     
     // --------- Private services --------- //
-
-
-
 }

@@ -1,9 +1,8 @@
 <?php
 namespace FilmFavoris;
 
-class Addmovie extends Page 
+class Addmovie extends Page
 {
-    
     protected $name;
     protected $producer;
     protected $date;
@@ -11,14 +10,13 @@ class Addmovie extends Page
     public function __construct()
     {
         $this->verifAddMovie();
-        $this->doc = parent::initHTML("Add Movie",'');
-        $this->doc .= parent::topNav(); 
+        $this->doc = parent::initHTML("Add Movie", '');
+        $this->doc .= parent::topNav();
         
         $this->doc .= $this->formAddMovie();
         
         $this->doc .= parent::endBal("body");
         $this->doc .= parent::endBal("html");
-        
     }
     protected function formAddMovie()
     {
@@ -35,38 +33,27 @@ class Addmovie extends Page
             <input name = "add_movie" type="hidden" value="add_movie">
             </form>';
         return $form;
-        
-        
-        
     }
    
     protected function checkAddMovieCover()
     {
-        if (isset($_POST['add_movie']))
-        {   
+        if (isset($_POST['add_movie'])) {
             $type = $_FILES['cover']['type'];
-            $size = $_FILES['cover']['size']; 
-            if($type != 'image/png' && $type != 'image/jpeg')
-            {
+            $size = $_FILES['cover']['size'];
+            if ($type != 'image/png' && $type != 'image/jpeg') {
                 header("location: add_movie.php?Cover=WrongType$type");
-                exit(); 
-            }
-            else
-            {
-                if($size > 1000000)
-                {
+                exit();
+            } else {
+                if ($size > 1000000) {
                     header("location: add_movie.php?Cover=SizeTooBig");
                     $this->doc .= '<a>photo trop grosse</a>';
-                    exit();  
-                }
-                else
-                {
+                    exit();
+                } else {
                     return true;
                 }
             }
-            if ($movefile)
-            {
-              header("location: add_movie.php?upload=Sucess");
+            if ($movefile) {
+                header("location: add_movie.php?upload=Sucess");
             }
         }
     }
@@ -80,37 +67,26 @@ class Addmovie extends Page
 
         $this->name = htmlspecialchars($namepg);
         $this->producer = htmlspecialchars($producerpg);
-        $this->date = htmlspecialchars($datepg);  
-
-
+        $this->date = htmlspecialchars($datepg);
     }
     protected function checkAddMovieInfo()
     {
-        if (isset($_POST['add_movie']))
-        {   
+        if (isset($_POST['add_movie'])) {
             $this->setInfoMovie();
-            if(empty($this->name) || empty($this->producer) || empty($this->date))
-            {  
+            if (empty($this->name) || empty($this->producer) || empty($this->date)) {
                 header("location:Add_movie.php?Addmovie=empty");
-                exit(); 
-            }
-            else
-            {
+                exit();
+            } else {
                 return true;
             }
         }
-              
     }
     protected function verifAddMovie()
     {
         $boolVerifInfo= $this->checkAddMovieInfo();
         $boolVerifCover = $this->checkAddMovieCover();
-        if (!$boolVerifCover && !$boolVerifInfo )
-        {
-            
-        }
-        else
-        {
+        if (!$boolVerifCover && !$boolVerifInfo) {
+        } else {
             /*info*/
             $this->setInfoMovie();
 
@@ -133,12 +109,10 @@ class Addmovie extends Page
          
             $row = $stmt->fetch();
             
-            $file_tmp = $_FILES['cover']['tmp_name']; 
+            $file_tmp = $_FILES['cover']['tmp_name'];
             $upload_folder = 'style/img/movie_cover/';
             $file_name = $row['count'];
-            $movefile = move_uploaded_file($file_tmp,$upload_folder .$file_name."_movie_cover.png");
-
+            $movefile = move_uploaded_file($file_tmp, $upload_folder .$file_name."_movie_cover.png");
         }
-              
     }
 }

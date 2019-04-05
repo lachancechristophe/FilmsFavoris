@@ -14,9 +14,8 @@ class User extends Record
     
     // --------- Public services --------- //
 
-    public function __construct($url) 
+    public function __construct($url)
     {
-
     }
     
     // --------- Protected services --------- //
@@ -24,6 +23,4 @@ class User extends Record
     
     
     // --------- Private services --------- //
-
-
 }

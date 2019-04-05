@@ -17,10 +17,12 @@ class Proprietaires extends Page
 
     public function connectAndFetch()
     {
-        $conStr = sprintf("pgsql:host=%s;port=%d;dbname=%s;",
-                          "192.168.56.10",
-                          '5432',
-                          'testdb');
+        $conStr = sprintf(
+            "pgsql:host=%s;port=%d;dbname=%s;",
+            "192.168.56.10",
+            '5432',
+            'testdb'
+        );
         $user = 'master';
         $pass = '123qweQWE';
 

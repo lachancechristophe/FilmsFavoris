@@ -1,14 +1,16 @@
 <?php
 namespace FilmFavoris;
 
-class ShowFavorite extends Page {
+class ShowFavorite extends Page
+{
     private $favoriteList = [];
-    public function __construct(){
-        $this->doc = parent::initHTML("Show Favorite",'');
+    public function __construct()
+    {
+        $this->doc = parent::initHTML("Show Favorite", '');
 
-        $this->doc .= parent::topNav(); 
+        $this->doc .= parent::topNav();
 
-        if(empty($_SESSION['user_id'])){
+        if (empty($_SESSION['user_id'])) {
             $this->doc .= parent::beginEndBal("p", "Il faut etre connecté pour voir les favoris.");
             $this->doc .= parent::endBal("body");
             $this->doc .= parent::endBal("html");
@@ -45,7 +47,6 @@ class ShowFavorite extends Page {
         $retStr .= parent::endBal("tr");
 
         foreach ($stmt as $row) {
-
             $lienDeleteFav = 'show_favorites.php?movie_id='.$row['id'].'&del_fav=true';
             $lienDetail = 'detail_movie.php?movie_id='.$row['id'].'';
 
@@ -53,15 +54,14 @@ class ShowFavorite extends Page {
             $retStr .= parent::beginEndBal("td", $row['user_id']);
             $retStr .= parent::beginEndBal("td", $row['movie_id']);
             $coverUrl = 'style/img/movie_cover/' . $row['id'] . '_movie_cover.png';
-            if(file_exists($coverUrl))
-            {
-                $src = $coverUrl; 
+            if (file_exists($coverUrl)) {
+                $src = $coverUrl;
             } else {
                 $src = 'style/img/movie_cover/Default_movie_cover.png';
             }
 
             $retStr .= parent::beginEndBal("td", '<img  src="' . $src . '" alt = "Cover" height="100" width="100">');
-            $retStr .= parent::beginEndBal("td", parent::createLink($lienDetail,$row['name']));
+            $retStr .= parent::beginEndBal("td", parent::createLink($lienDetail, $row['name']));
             $retStr .= parent::beginEndBal("td", $row['producer']);
             $retStr .= parent::beginEndBal("td", $row['release_date']);
             $retStr .= parent::beginEndBal("td", parent::createLink($lienDeleteFav, 'Delete Favorite'));
@@ -73,8 +73,7 @@ class ShowFavorite extends Page {
 
     public function checkDeleteFavorite()
     {
-        if (!empty($_REQUEST['movie_id']) && $_REQUEST['del_fav'] == "true" && !empty($_SESSION['user_id']))
-        {   
+        if (!empty($_REQUEST['movie_id']) && $_REQUEST['del_fav'] == "true" && !empty($_SESSION['user_id'])) {
             $conn = new Connection();
             $pdo = $conn->getPDO();
             $query = "DELETE FROM favorite_movie WHERE user_id=";
@@ -82,7 +81,6 @@ class ShowFavorite extends Page {
             $pdo->query($query);
             $this->doc .= "Favorite deleted ! Refreshing in 3 sec...";
             header("Refresh:3");
-
         }
     }
 }

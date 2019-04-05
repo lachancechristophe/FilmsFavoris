@@ -42,16 +42,12 @@ class Page
         $topNav .= '<li><a href="show_users.php">Show Users</a></li>';
         $topNav .= '<li><a href="show_favorites.php">Show Favorites</a></li>';
         
-        if(isset($_SESSION['user_id']))
-        {
+        if (isset($_SESSION['user_id'])) {
             $topNav .= '<li><a href="add_movie.php">Add Movie</a></li>';
             $topNav .= '<li><form class="logout" method="POST">
             <input name="log_id" type="hidden" value="logout">
             <button class="logout" type="submit" name="submit">Logout</button></form></li>';
-            
-        }
-        else
-        {
+        } else {
             $topNav .= '<li><a href="login.php">Login</a></li>';
             $topNav .= '<li><a href="signup.php">Signup</a></li>';
         }
@@ -64,12 +60,9 @@ class Page
     }
     public function logoutCheck()
     {
-         if(isset($_POST['log_id']))
-            {
-              
-                $f_id=$_POST['log_id'];
-                switch($f_id)
-                {
+        if (isset($_POST['log_id'])) {
+            $f_id=$_POST['log_id'];
+            switch ($f_id) {
                     case 'logout':
                     {
 
@@ -84,31 +77,26 @@ class Page
 
                     }
 
-                    break; 
-                }   
-                        
-            }
+                    break;
+                }
+        }
     }
     public function beginForm($method, $action, $name)
     {
-        if($action == "")
-        {
+        if ($action == "") {
             return "<form method='" . $method . "' name='" . $name . "' >\n";
         } else {
             return "<form method='" . $method . "' action='" . $action . "' name='" . $name . "' >\n";
         }
-        
     }
 
     public function endForm()
     {
         return "</form>";
-        
     }
 
     public function insertInput($type, $name, $humantext)
     {
-
         $retStr = "<p><label for='" . $name . "'>" . $humantext . "</label><br/>";
         return $retStr . "<input name='" . $name . "' type='" . $type . "' id='" . $name . "' value='' /> </p>";
     }

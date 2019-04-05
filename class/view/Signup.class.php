@@ -3,25 +3,21 @@ namespace FilmFavoris;
 
 use PDO;
 
-class Signup extends Page 
+class Signup extends Page
 {
-
-    
     public function __construct()
     {
-        
-            $this->doc = parent::initHTML("Signup",'');
+        $this->doc = parent::initHTML("Signup", '');
 
 
-            $this->doc .= parent::topNav(); 
+        $this->doc .= parent::topNav();
 
-            $this->signUpCheck();
+        $this->signUpCheck();
             
-            $this->doc .= $this->formSignUp();
+        $this->doc .= $this->formSignUp();
 
-            $this->doc .= parent::endBal("body");
-            $this->doc .= parent::endBal("html");
-        
+        $this->doc .= parent::endBal("body");
+        $this->doc .= parent::endBal("html");
     }
     protected function formSignUp()
     {
@@ -36,17 +32,11 @@ class Signup extends Page
             <input name= "f_id" type="hidden" value="signup">
             </form>';
         return $form;
-        
-        
-        
     }
    
     protected function signUpCheck()
     {
-        if (isset( $_POST['f_id']))
-        {
-            
-
+        if (isset($_POST['f_id'])) {
             $uidpg= pg_escape_string($_REQUEST['uid']);
             $pwdpg = pg_escape_string($_REQUEST['pwd']);
             $emlpg = pg_escape_string($_REQUEST['email']);
@@ -62,33 +52,22 @@ class Signup extends Page
 
 
 
-            //error handler 
-            //check empty fields 
+            //error handler
+            //check empty fields
 
 
-            if(false)//strpos($uid, '<') !== false||strpos($a, '>') !== false
-            {
+            if (false) {//strpos($uid, '<') !== false||strpos($a, '>') !== false
                 header("location:signup.php?signUp=NoInjectionXd");
 
-                    exit();
-
-            }
-            else
-            {
-
-
-                if(empty($uid) ||empty($pwd) ||empty($eml))
-                {
+                exit();
+            } else {
+                if (empty($uid) ||empty($pwd) ||empty($eml)) {
 
                     //echo "<script>alert('empty')/script>";
                     header("location:signup.php?signUp=empty");
 
-                    exit(); 
-                }
-
-                else//valid character check
-                {
-                    
+                    exit();
+                } else {//valid character check
                     $conn = new Connection();
                     $pdo = $conn->getPDO();
 
@@ -99,17 +78,12 @@ class Signup extends Page
                     $rows = count($data);
 
 
-                    if($rows>0 )
-                    {
+                    if ($rows>0) {
                         header("location:signup.php?signUp=UserUtiliser");
-                        exit(); 
-
-
-                    }
-                    else
-                    {
+                        exit();
+                    } else {
                         //hashing
-                        $hashedPwd = password_hash($pwd,PASSWORD_DEFAULT);
+                        $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
                         $query = "INSERT INTO public.movie_user (username, hashed_password, email, confirmed)";
                         $query .= "VALUES (:uid,:hashedPwd, :eml, False)";
@@ -147,16 +121,10 @@ class Signup extends Page
                         mail($eml, "Confirmation Films Favoris", $emailstring);
 
                         header("location:signup.php?signUp=Success");
-                        exit(); 
-                    }  
-
+                        exit();
+                    }
                 }
-
-                    
-                
             }
-
         }
-        
     }
 }

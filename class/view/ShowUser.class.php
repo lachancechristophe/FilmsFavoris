@@ -1,18 +1,20 @@
 <?php
 namespace FilmFavoris;
 
-class ShowUser extends Page {
+class ShowUser extends Page
+{
     private $usersList = [];
-    public function __construct(){
+    public function __construct()
+    {
         $conn = new Connection();
         $pdo = $conn->getPDO();
         $query = "SELECT * FROM movie_user";
         $usersList = $pdo->query($query);
         
-        $this->doc = parent::initHTML("Movie user",'');
+        $this->doc = parent::initHTML("Movie user", '');
             
             
-        $this->doc .= parent::topNav(); 
+        $this->doc .= parent::topNav();
         
         
         $this->createFormatted($usersList);

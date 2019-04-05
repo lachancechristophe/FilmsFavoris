@@ -12,9 +12,8 @@ class UserMovie extends Record
     
     // --------- Public services --------- //
 
-    public function __construct($url) 
+    public function __construct($url)
     {
-
     }
     
     // --------- Protected services --------- //
@@ -22,6 +21,4 @@ class UserMovie extends Record
     
     
     // --------- Private services --------- //
-
-
 }

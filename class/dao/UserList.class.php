@@ -12,9 +12,8 @@ class UserList extends RecordList
     
     // --------- Public services --------- //
 
-    public function __construct($url) 
+    public function __construct($url)
     {
-
     }
     
     // --------- Protected services --------- //
@@ -22,5 +21,4 @@ class UserList extends RecordList
     
     
     // --------- Private services --------- //
-
 }
