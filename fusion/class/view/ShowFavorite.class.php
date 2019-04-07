@@ -49,7 +49,7 @@ class ShowFavorite extends Page
 
         foreach ($stmt as $row) {
             $lienDeleteFav = 'index.php?page=show_favorite&movie_id='.$row['id'].'&del_fav=true';
-            $lienDetail = 'index.php?page=show_favorite&movie_id='.$row['id'].'';
+            $lienDetail = 'index.php?page=detail_movie&movie_id='.$row['id'].'';
 
             $retStr .= parent::beginBal("tr");
             $retStr .= parent::beginEndBal("td", $row['user_id']);

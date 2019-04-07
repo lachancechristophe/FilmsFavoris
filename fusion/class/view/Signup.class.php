@@ -12,9 +12,11 @@ class Signup extends Page
 
         $this->doc .= parent::topNav();
 
-        $this->signUpCheck();
+        
             
         $this->doc .= $this->formSignUp();
+
+        $this->signUpCheck();
 
         $this->doc .= parent::endBal("body");
         $this->doc .= parent::endBal("html");
@@ -55,76 +57,74 @@ class Signup extends Page
             //error handler
             //check empty fields
 
+            
+            if (empty($uid) ||empty($pwd) ||empty($eml)) {
 
-            if (false) {//strpos($uid, '<') !== false||strpos($a, '>') !== false
-                header("location:signup.php?signUp=NoInjectionXd");
+                //echo "<script>alert('empty')/script>";
+                $this->doc .= "<a class = 'error'>un est champ vide!</a>";
 
-                exit();
-            } else {
-                if (empty($uid) ||empty($pwd) ||empty($eml)) {
 
-                    //echo "<script>alert('empty')/script>";
-                    header("location:signup.php?signUp=empty");
+            } 
+            else 
+            {//valid character check
+                $conn = new Connection();
+                $pdo = $conn->getPDO();
 
-                    exit();
-                } else {//valid character check
-                    $conn = new Connection();
-                    $pdo = $conn->getPDO();
+                $sql = $pdo->prepare("SELECT * FROM public.movie_user WHERE username=:uid");
+                $sql->bindParam(':uid', $uid);
+                $sql->execute();
+                $data = $sql->fetchAll();
+                $rows = count($data);
 
-                    $sql = $pdo->prepare("SELECT * FROM public.movie_user WHERE username=:uid");
+
+                if ($rows>0) 
+                {
+                    $this->doc .= "<a class = 'warn'>user utiliser</a>";
+                } 
+                else 
+                {
+                    //hashing
+                    $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+
+                    $query = "INSERT INTO public.movie_user (username, hashed_password, email, confirmed)";
+                    $query .= "VALUES (:uid,:hashedPwd, :eml, False)";
+                    $sql= $pdo->prepare($query);
+                    
                     $sql->bindParam(':uid', $uid);
+                    $sql->bindParam(':eml', $eml);
+                    $sql->bindParam(':hashedPwd', $hashedPwd);
+
                     $sql->execute();
-                    $data = $sql->fetchAll();
-                    $rows = count($data);
 
+                    $confirmcode = substr(md5(rand()), 0, 7);
+                    $query = "INSERT INTO public.movie_user_confirm (user_id, confirm_code, confirmed)";
+                    $query .= "VALUES (:uid,:confirmcode, :false)";
+                    $sql= $pdo->prepare($query);
 
-                    if ($rows>0) {
-                        header("location:signup.php?signUp=UserUtiliser");
-                        exit();
-                    } else {
-                        //hashing
-                        $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+                    echo $query . "\n";
+                    echo $pdo->lastInsertId() . "\n";
+                    echo $confirmcode . "\n";
+                    $lastIdInsert = $pdo->lastInsertId();
+                    $false = "False";
+                    $sql->bindParam(':uid',$lastIdInsert );
+                    $sql->bindParam(':confirmcode', $confirmcode);
+                    $sql->bindParam(':false', $false);
 
-                        $query = "INSERT INTO public.movie_user (username, hashed_password, email, confirmed)";
-                        $query .= "VALUES (:uid,:hashedPwd, :eml, False)";
-                        $sql= $pdo->prepare($query);
-                        
-                        $sql->bindParam(':uid', $uid);
-                        $sql->bindParam(':eml', $eml);
-                        $sql->bindParam(':hashedPwd', $hashedPwd);
+                    $sql->execute();
 
-                        $sql->execute();
+                    $emailstring = "Confirmation Films Favoris\n\n";
+                    $emailstring .= "Pour confirmer votre inscription, visitez la page suivante: \n\n";
+                    $emailstring .= "/confirm_user.php\n\n";
+                    $emailstring .= "Et entrez le code suivant:\n\n";
+                    $emailstring .= $confirmcode;
+                    $emailstring .= "\n\nMerci!";
 
-                        $confirmcode = substr(md5(rand()), 0, 7);
-                        $query = "INSERT INTO public.movie_user_confirm (user_id, confirm_code, confirmed)";
-                        $query .= "VALUES (:uid,:confirmcode, :false)";
-                        $sql= $pdo->prepare($query);
+                    mail($eml, "Confirmation Films Favoris", $emailstring);
 
-                        echo $query . "\n";
-                        echo $pdo->lastInsertId() . "\n";
-                        echo $confirmcode . "\n";
-
-                        $false = "False";
-                        $sql->bindParam(':uid', $pdo->lastInsertId());
-                        $sql->bindParam(':confirmcode', $confirmcode);
-                        $sql->bindParam(':false', $false);
-
-                        $sql->execute();
-
-                        $emailstring = "Confirmation Films Favoris\n\n";
-                        $emailstring .= "Pour confirmer votre inscription, visitez la page suivante: \n\n";
-                        $emailstring .= "/confirm_user.php\n\n";
-                        $emailstring .= "Et entrez le code suivant:\n\n";
-                        $emailstring .= $confirmcode;
-                        $emailstring .= "\n\nMerci!";
-
-                        mail($eml, "Confirmation Films Favoris", $emailstring);
-
-                        header("location:signup.php?signUp=Success");
-                        exit();
-                    }
+                    $this->doc .= "<a class = 'succes'>tu est enregistrer!</a>";
                 }
             }
+            
         }
     }
 }

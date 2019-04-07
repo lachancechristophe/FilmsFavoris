@@ -9,12 +9,13 @@ class AddMovie extends Page
     
     public function __construct()
     {
-        $this->verifAddMovie();
-        $this->doc = parent::initHTML("Add Movie", '');
+        
+        $this->doc .= parent::initHTML("Add Movie", '');
         $this->doc .= parent::topNav();
         
         $this->doc .= $this->formAddMovie();
-        
+        $this->verifAddMovie();
+
         $this->doc .= parent::endBal("body");
         $this->doc .= parent::endBal("html");
     }
@@ -37,23 +38,32 @@ class AddMovie extends Page
    
     protected function checkAddMovieCover()
     {
-        if (isset($_POST['add_movie'])) {
+        if (isset($_POST['add_movie'])) 
+        {
             $type = $_FILES['cover']['type'];
             $size = $_FILES['cover']['size'];
-            if ($type != 'image/png' && $type != 'image/jpeg') {
-                header("location: add_movie.php?Cover=WrongType$type");
-                exit();
-            } else {
-                if ($size > 1000000) {
-                    header("location: add_movie.php?Cover=SizeTooBig");
-                    $this->doc .= '<a>photo trop grosse</a>';
-                    exit();
-                } else {
+            if ($type != 'image/png' && $type != 'image/jpeg') 
+            {
+                if(empty(!$type))
+                {
+                    $this->doc .= "<a class = 'warn'> Mauvais Type : $type </a><br>";
+                }
+                else
+                {
+                    $this->doc .= "<a class = 'warn'> pas de cover :( </a><br>";
+                }
+
+            } 
+            elseif($type == 'image/png' && $type == 'image/jpeg')
+            {
+                if ($size > 1000000) 
+                {
+                    $this->doc .= "<a class = 'error'> photo trop grosse</a><br>";
+                
+                } else 
+                {
                     return true;
                 }
-            }
-            if ($movefile) {
-                header("location: add_movie.php?upload=Sucess");
             }
         }
     }
@@ -71,12 +81,17 @@ class AddMovie extends Page
     }
     protected function checkAddMovieInfo()
     {
-        if (isset($_POST['add_movie'])) {
+        if (isset($_POST['add_movie'])) 
+        {
             $this->setInfoMovie();
-            if (empty($this->name) || empty($this->producer) || empty($this->date)) {
-                header("location:Add_movie.php?Addmovie=empty");
-                exit();
-            } else {
+            if (empty($this->name) || empty($this->producer) || empty($this->date)) 
+            {
+                
+                $this->doc .= "<a class = 'error'> un champ est vide!</a><br>";
+            
+                
+            } else 
+            {
                 return true;
             }
         }
@@ -85,8 +100,12 @@ class AddMovie extends Page
     {
         $boolVerifInfo= $this->checkAddMovieInfo();
         $boolVerifCover = $this->checkAddMovieCover();
-        if (!$boolVerifCover && !$boolVerifInfo) {
-        } else {
+        if (!$boolVerifCover && !$boolVerifInfo) 
+        {
+           
+        } 
+        else 
+        {
             /*info*/
             $this->setInfoMovie();
 
@@ -113,6 +132,10 @@ class AddMovie extends Page
             $upload_folder = 'style/img/movie_cover/';
             $file_name = $row['count'];
             $movefile = move_uploaded_file($file_tmp, $upload_folder .$file_name."_movie_cover.png");
+
+            /*message*/
+            $this->doc .= "<a class = 'succes'> vous avez créer un flilm!</a><br>";
+
         }
     }
 }
