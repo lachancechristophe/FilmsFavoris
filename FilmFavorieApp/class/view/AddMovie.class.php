@@ -46,11 +46,11 @@ class AddMovie extends Page
             {
                 if(empty(!$type))
                 {
-                    $this->doc .= "<a class = 'warn'> Mauvais Type : $type </a><br>";
+                    $this->doc .= "<p class = 'warn'> Mauvais Type : $type </p><br>";
                 }
                 else
                 {
-                    $this->doc .= "<a class = 'warn'> pas de cover :( </a><br>";
+                    $this->doc .= "<p class = 'warn'> pas de cover :( </p><br>";
                 }
 
             } 
@@ -58,7 +58,7 @@ class AddMovie extends Page
             {
                 if ($size > 1000000) 
                 {
-                    $this->doc .= "<a class = 'error'> photo trop grosse</a><br>";
+                    $this->doc .= "<p class = 'error'> photo trop grosse</p><br>";
                 
                 } else 
                 {
@@ -87,7 +87,7 @@ class AddMovie extends Page
             if (empty($this->name) || empty($this->producer) || empty($this->date)) 
             {
                 
-                $this->doc .= "<a class = 'error'> un champ est vide!</a><br>";
+                $this->doc .= "<p class = 'error'> un champ est vide!</p><br>";
             
                 
             } else 
@@ -134,7 +134,7 @@ class AddMovie extends Page
             $movefile = move_uploaded_file($file_tmp, $upload_folder .$file_name."_movie_cover.png");
 
             /*message*/
-            $this->doc .= "<a class = 'succes'> vous avez créer un flilm!</a><br>";
+            $this->doc .= "<p class = 'succes'> vous avez créer un flilm!</p><br>";
 
         }
     }

@@ -61,7 +61,7 @@ class Signup extends Page
             if (empty($uid) ||empty($pwd) ||empty($eml)) {
 
                 //echo "<script>alert('empty')/script>";
-                $this->doc .= "<a class = 'error'>un est champ vide!</a>";
+                $this->doc .= "<p class = 'error'>un est champ vide!</p>";
 
 
             } 
@@ -79,7 +79,7 @@ class Signup extends Page
 
                 if ($rows>0) 
                 {
-                    $this->doc .= "<a class = 'warn'>user utiliser</a>";
+                    $this->doc .= "<p class = 'warn'>user utiliser</p>";
                 } 
                 else 
                 {
@@ -121,7 +121,7 @@ class Signup extends Page
 
                     mail($eml, "Confirmation Films Favoris", $emailstring);
 
-                    $this->doc .= "<a class = 'succes'>tu est enregistrer!</a>";
+                    $this->doc .= "<p class = 'succes'>tu est enregistrer!</p>";
                 }
             }
             

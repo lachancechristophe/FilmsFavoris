@@ -49,7 +49,8 @@ class Login extends Page
                 
             if ($rows>0) {
                 if (!$data[0]->confirmed) {
-                    $this->doc .= "<a class = 'warn'>You need to confirm your user account before using this website!</a>";
+                    $this->doc .= "<p class = 'warn'>You need to confirm your user a";
+                    $this->doc .= "ccount before using this website!</p>";
                 }
 
 
@@ -60,11 +61,11 @@ class Login extends Page
                     header("location: index.php?Login_success");
                 } else {
                     if ($data[0]->confirmed) {
-                        $this->doc .= "<a class = 'error'>Your Login Name or Password is invalid</a>";
+                        $this->doc .= "<p class = 'error'>Your Login Name or Password is invalid</p";
                     }
                 }
             } else {
-                $this->doc .= "<a class = 'error' >Your Login Name or Password is invalid</a>";
+                $this->doc .= "<p class = 'error' >Your Login Name or Password is invalid</p>";
             }
         }
     }
