@@ -64,7 +64,12 @@ class ShowMovie extends Page {
 
         foreach ($stmt as $row) {
 
-            $isFav=$this->checkIfFav($row['id']);
+            $isFav = false;
+
+            if(!empty($_SESSION['user_id'])){
+                $isFav=$this->checkIfFav($row['id']);
+            }
+
             $retStr .= parent::beginBal("tr");
             $lienDetail = 'detail_movie.php?movie_id='.$row['id'].'';
             $retStr .= parent::beginEndBal("td",$row['id']);
