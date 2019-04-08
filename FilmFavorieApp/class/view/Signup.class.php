@@ -114,7 +114,7 @@ class Signup extends Page
 
                     mail($eml, "Confirmation Films Favoris", $emailstring);
 
-                    $this->doc .= "<a class = 'succes'>tu est enregistrer!</a>";
+                    $this->doc .= "<p class = 'succes'>tu est enregistrer!</p>";
                 }
             }
         }

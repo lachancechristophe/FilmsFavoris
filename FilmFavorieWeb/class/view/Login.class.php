@@ -19,12 +19,14 @@ class Login extends Page
         $this->doc .= parent::insertInputWithValue("submit", "btn-submit", "", "Valider");
         $this->doc .= parent::endForm();
         
+        $this->checkLogin();
+
         $this->doc .= parent::endBal("body");
         $this->doc .= parent::endBal("html");
         
         
 
-        $this->checkLogin();
+
     }
 
     private function checkLogin()
@@ -47,7 +49,7 @@ class Login extends Page
                 
             if ($rows>0) {
                 if (!$data[0]->confirmed) {
-                    $this->doc .= "You need to confirm your user account before using this website!";
+                    $this->doc .= "<p>You need to confirm your user account before using this website!</p>";
                 }
 
 
@@ -58,11 +60,11 @@ class Login extends Page
                     header("location: index.php?Login_success");
                 } else {
                     if ($data[0]->confirmed) {
-                        $this->doc .= "Your Login Name or Password is invalid";
+                        $this->doc .= "<p>Your Login Name or Password is invalid</p>";
                     }
                 }
             } else {
-                $this->doc .= "Your Login Name or Password is invalid";
+                $this->doc .= "<p>Your Login Name or Password is invalid</p>";
             }
         }
     }
