@@ -93,10 +93,6 @@ class Signup extends Page
                     $query = "INSERT INTO public.movie_user_confirm (user_id, confirm_code, confirmed)";
                     $query .= "VALUES (:uid,:confirmcode, :false)";
                     $sql= $pdo->prepare($query);
-
-                    echo $query . "\n";
-                    echo $pdo->lastInsertId() . "\n";
-                    echo $confirmcode . "\n";
                     $lastIdInsert = $pdo->lastInsertId();
                     $false = "False";
                     $sql->bindParam(':uid', $lastIdInsert);

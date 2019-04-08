@@ -7,7 +7,7 @@ class Confirmation extends Page
     {
         $this->doc = parent::initHTML("Confirmation", '');
         $this->doc .= parent::topNav();
-            
+        $this->confirmUser();
         $this->doc .= $this->formConfirm();
 
         $this->doc .= parent::endBal("body");
@@ -15,7 +15,7 @@ class Confirmation extends Page
     }
     protected function formConfirm()
     {
-        $form ='<form  action="confirm_user.php" method="POST" >
+        $form ='<form  action="index.php?page=confirm_user" method="POST" >
             <label>username :</label><br>
             <input type="text" name="uid" placeholder="Username"><br>
             <label>Confirm code :</label><br>
