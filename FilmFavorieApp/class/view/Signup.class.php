@@ -62,11 +62,7 @@ class Signup extends Page
 
                 //echo "<script>alert('empty')/script>";
                 $this->doc .= "<a class = 'error'>un est champ vide!</a>";
-
-
-            } 
-            else 
-            {//valid character check
+            } else {//valid character check
                 $conn = new Connection();
                 $pdo = $conn->getPDO();
 
@@ -77,12 +73,9 @@ class Signup extends Page
                 $rows = count($data);
 
 
-                if ($rows>0) 
-                {
+                if ($rows>0) {
                     $this->doc .= "<a class = 'warn'>user utiliser</a>";
-                } 
-                else 
-                {
+                } else {
                     //hashing
                     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
@@ -106,7 +99,7 @@ class Signup extends Page
                     echo $confirmcode . "\n";
                     $lastIdInsert = $pdo->lastInsertId();
                     $false = "False";
-                    $sql->bindParam(':uid',$lastIdInsert );
+                    $sql->bindParam(':uid', $lastIdInsert);
                     $sql->bindParam(':confirmcode', $confirmcode);
                     $sql->bindParam(':false', $false);
 
@@ -124,7 +117,6 @@ class Signup extends Page
                     $this->doc .= "<a class = 'succes'>tu est enregistrer!</a>";
                 }
             }
-            
         }
     }
 }

@@ -23,10 +23,6 @@ class Login extends Page
 
         $this->doc .= parent::endBal("body");
         $this->doc .= parent::endBal("html");
-        
-        
-
-        
     }
 
     private function checkLogin()

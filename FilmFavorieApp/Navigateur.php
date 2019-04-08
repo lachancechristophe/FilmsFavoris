@@ -1,17 +1,15 @@
 <?php
 namespace FilmFavoris;
 
-class Navigateur 
+class Navigateur
 {
-
     public function start()
     {
-        $page = '';        
-        if(isset($_GET['page']))
-        {
+        $page = '';
+        if (isset($_GET['page'])) {
             $page = $_GET['page'];
         }
-        switch($page){
+        switch ($page) {
 
             case 'detail_movie':
                 $page = new DetailMovie();
@@ -50,7 +48,5 @@ class Navigateur
 
         }
         $page->showDoc();
-
     }
-
 }
