@@ -1,4 +1,6 @@
 <?php
+namespace FilmFavoris;
+
 class Navigateur 
 {
 
@@ -11,44 +13,43 @@ class Navigateur
         }
         switch($page){
 
+            case 'detail_movie':
+                $page = new DetailMovie();
+                break;
             case 'add_movie':
                 $page = new AddMovie();
-                $page->showDoc();
                 break;
 
             case 'show_favorite':
                 $page = new ShowFavorite();
-                $page->showDoc();
                 break;
 
             case 'show_user':
                 $page = new ShowUser();
-                $page->showDoc();
+                break;
+
+            case 'confirm_user':
+                $page = new Confirmation();
                 break;
 
             case 'show_movie':
                 $page = new ShowMovie();
-                $page->showDoc();
                 break;
 
             case 'login':
                 $page = new Login();
-                $page->showDoc();
-                
                 break;
 
             case 'signup':
                 $page = new Signup();
-                $page->showDoc();
                 break;
 
             default:
                 $page = new Index();
-                $page->showDoc();
-
-
+                break;
 
         }
+        $page->showDoc();
 
     }
 
