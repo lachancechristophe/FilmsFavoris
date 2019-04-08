@@ -114,7 +114,7 @@ class Signup extends Page
 
                     $emailstring = "Confirmation Films Favoris\n\n";
                     $emailstring .= "Pour confirmer votre inscription, visitez la page suivante: \n\n";
-                    $emailstring .= "/confirm_user.php\n\n";
+                    $emailstring .= "/index.php?page=confirm_user\n\n";
                     $emailstring .= "Et entrez le code suivant:\n\n";
                     $emailstring .= $confirmcode;
                     $emailstring .= "\n\nMerci!";
