@@ -112,7 +112,7 @@ class AddMovie extends Page
             $movefile = move_uploaded_file($file_tmp, $upload_folder .$file_name."_movie_cover.png");
 
             /*message*/
-            $this->doc .= "<a class = 'succes'> vous avez créer un flilm!</a><br>";
+            $this->doc .= "<a class = 'succes'> vous avez créé un film!</a><br>";
         }
     }
 }
