@@ -41,14 +41,14 @@ class AddMovie extends Page
             $type = $_FILES['cover']['type'];
             $size = $_FILES['cover']['size'];
             if ($type != 'image/png' && $type != 'image/jpeg') {
-                if (empty(!$type)) {
+                if (!empty($type)) {
                     $this->doc .= "<a class = 'warn'> Mauvais Type : $type </a><br>";
                 } else {
-                    $this->doc .= "<a class = 'warn'> pas de cover :( </a><br>";
+                    $this->doc .= "<a class = 'warn'> Pas de couverture :( </a><br>";
                 }
             } elseif ($type == 'image/png' && $type == 'image/jpeg') {
                 if ($size > 1000000) {
-                    $this->doc .= "<a class = 'error'> photo trop grosse</a><br>";
+                    $this->doc .= "<a class = 'error'> Photo trop grosse</a><br>";
                 } else {
                     return true;
                 }
