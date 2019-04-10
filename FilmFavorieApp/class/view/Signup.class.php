@@ -11,7 +11,7 @@ class Signup extends Page
 
 
         $this->doc .= parent::topNav();
-        $retStr .= parent::beginEndBal("h1", "Enregistrer un utilisateur");
+        $this->doc .=  parent::beginEndBal("h1", "Enregistrer un utilisateur");
         
             
         $this->doc .= $this->formSignUp();

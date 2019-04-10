@@ -19,7 +19,7 @@ class ShowMovie extends Page
         $this->doc = parent::initHTML("Show Movie", '');
             
         $this->doc .= parent::topNav();
-        $retStr .= parent::beginEndBal("h1", "Liste des films");
+        $this->doc .= parent::beginEndBal("h1", "Liste des films");
         $this->createFormatted($moviesList);
         
         $this->doc .= parent::endBal("body");

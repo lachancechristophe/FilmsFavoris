@@ -8,7 +8,7 @@ class DetailMovie extends Page
         $this->doc = parent::initHTML("Detail Movie", '');
 
         $this->doc .= parent::topNav();
-        $retStr .= parent::beginEndBal("h1", "Détail du film");
+        $this->doc .=  parent::beginEndBal("h1", "Détail du film");
         $this->connectVerif();
   
         $this->doc .= parent::endBal("body");

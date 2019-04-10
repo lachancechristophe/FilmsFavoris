@@ -15,7 +15,7 @@ class ShowUser extends Page
             
             
         $this->doc .= parent::topNav();
-        $retStr .= parent::beginEndBal("h1", "Liste des utilisateurs");
+        $this->doc .=  parent::beginEndBal("h1", "Liste des utilisateurs");
         
         $this->createFormatted($usersList);
         

@@ -12,7 +12,7 @@ class ShowUser extends Page
         $usersList = $pdo->query($query);
         
         $this->doc = parent::initHTML("Utilisateurs", '');
-        $retStr .= parent::beginEndBal("h1", "Liste des utilisateur");    
+        $this->doc .= parent::beginEndBal("h1", "Liste des utilisateur");    
             
         $this->doc .= parent::topNav();
         

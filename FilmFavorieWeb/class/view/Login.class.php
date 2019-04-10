@@ -12,7 +12,7 @@ class Login extends Page
         $this->doc = parent::initHTML("Login", "");
         
         $this->doc .= parent::topNav();
-        $retStr .= parent::beginEndBal("h1", "Se connecter");
+        $this->doc .=  parent::beginEndBal("h1", "Se connecter");
         $this->doc .= parent::beginForm("POST", "", "formLogin");
         $this->doc .= parent::insertInput("text", "username", "username :");
         $this->doc .= parent::insertInput("password", "password", "password :");

@@ -9,7 +9,7 @@ class ShowFavorite extends Page
         $this->doc = parent::initHTML("Show Favorite", '');
 
         $this->doc .= parent::topNav();
-        $retStr .= parent::beginEndBal("h1", "Liste des favoris");
+        $this->doc .=  parent::beginEndBal("h1", "Liste des favoris");
         if (empty($_SESSION['user_id'])) {
             $this->doc .= parent::beginEndBal("p", "Il faut etre connecté pour voir les favoris.");
             $this->doc .= parent::endBal("body");
