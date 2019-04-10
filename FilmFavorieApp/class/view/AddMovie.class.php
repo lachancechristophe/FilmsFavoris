@@ -101,16 +101,28 @@ class AddMovie extends Page
             $sql->bindParam(':date', $this->date);
             $sql->execute();
             /*cover*/
-            $stmt = $pdo->query("SELECT COUNT(*) FROM  movie as number");
-        
+            $stmt = $pdo->query("SELECT id FROM movie order by id desc limit 1");
+            
          
             $row = $stmt->fetch();
             
             $file_tmp = $_FILES['cover']['tmp_name'];
             $upload_folder = 'style/img/movie_cover/';
-            $file_name = $row['count'];
-            $movefile = move_uploaded_file($file_tmp, $upload_folder .$file_name."_movie_cover.png");
+            $file_name = $row['id'];
 
+            $fullPath = $upload_folder.$file_name."_movie_cover.png";
+
+
+            $movefile = move_uploaded_file($file_tmp, $fullPath);
+            /*update into the row */
+            $querry = "UPDATE movie SET cover_path = :fullPath WHERE id = :id";
+
+            $sql = $pdo->prepare($querry);
+
+            $sql->bindParam(':fullPath', $fullPath);
+            $sql->bindParam(':id',$row['id']);
+            
+            $sql->execute();
             /*message*/
             $this->doc .= "<a class = 'succes'> vous avez créé un film!</a><br>";
         }
