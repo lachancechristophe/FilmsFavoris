@@ -12,7 +12,7 @@ class Login extends Page
         $this->doc = parent::initHTML("Login", "");
         
         $this->doc .= parent::topNav();
-        
+        $retStr .= parent::beginEndBal("h1", "Se connecter");
         $this->doc .= parent::beginForm("POST", "", "formLogin");
         $this->doc .= parent::insertInput("text", "username", "username :");
         $this->doc .= parent::insertInput("password", "password", "password :");
@@ -45,8 +45,8 @@ class Login extends Page
                 
             if ($rows>0) {
                 if (!$data[0]->confirmed) {
-                    $this->doc .= "<p class = 'warn'>You need to confirm your user a";
-                    $this->doc .= "ccount before using this website!</p>";
+                    $this->doc .= "<p class = 'warn'>Vous devez confirmer votre";
+                    $this->doc .= " compte avant d'utiliser ce site!</p>";
                 }
 
 
@@ -57,11 +57,11 @@ class Login extends Page
                     header("location: index.php?Login_success");
                 } else {
                     if ($data[0]->confirmed) {
-                        $this->doc .= "<p class = 'error'>Your Login Name or Password is invalid</p";
+                        $this->doc .= "<p class = 'error'>Nom d'utilisateur ou mot de passe invalide.</p";
                     }
                 }
             } else {
-                $this->doc .= "<p class = 'error' >Your Login Name or Password is invalid</p>";
+                $this->doc .= "<p class = 'error'>Nom d'utilisateur ou mot de passe invalide.</p>";
             }
         }
     }

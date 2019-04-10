@@ -11,7 +11,7 @@ class AddMovie extends Page
     {
         $this->doc .= parent::initHTML("Add Movie", '');
         $this->doc .= parent::topNav();
-        
+        $retStr .= parent::beginEndBal("h1", "Ajouter un film");
         $this->doc .= $this->formAddMovie();
         $this->verifAddMovie();
 

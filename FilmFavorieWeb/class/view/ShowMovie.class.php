@@ -14,7 +14,7 @@ class ShowMovie extends Page
         $this->doc = parent::initHTML("Show Movie", '');
             
         $this->doc .= parent::topNav();
-        
+        $retStr .= parent::beginEndBal("h1", "Liste des films");
         $this->createFormatted($moviesList);
         
         $this->doc .= parent::endBal("body");
@@ -27,17 +27,18 @@ class ShowMovie extends Page
             $conn = new Connection();
             $pdo = $conn->getPDO();
 
-            $queryCheckFav = "SELECT * FROM favorite_movie WHERE movie_id=".$_REQUEST['movie_id']." AND user_id=".$_SESSION['user_id'];
+            $queryCheckFav = "SELECT * FROM favorite_movie ";
+            $queryCheckFav .= "WHERE movie_id=".$_REQUEST['movie_id']." AND user_id=".$_SESSION['user_id'];
             $list_fav = $pdo->query($queryCheckFav);
             $row = $list_fav->fetch();
 
             if ($row > 0) {
-                $this->doc .= "Film deja Favori !";
+                $this->doc .= "Film déjà favori !";
             } else {
                 $query = "INSERT INTO favorite_movie (user_id, movie_id)";
                 $query .= "VALUES ('" . $_SESSION['user_id'] . "', '" . $_REQUEST['movie_id'] . "');";
                 $pdo->query($query);
-                $this->doc .= "vous avez favoriter un film!";
+                $this->doc .= "Vous avez ajouté un film à vos favoris!";
             }
         }
     }

@@ -11,7 +11,7 @@ class Signup extends Page
 
 
         $this->doc .= parent::topNav();
-
+        $retStr .= parent::beginEndBal("h1", "Enregistrer un utilisateur");
         
             
         $this->doc .= $this->formSignUp();
@@ -42,26 +42,18 @@ class Signup extends Page
             $uidpg= pg_escape_string($_REQUEST['uid']);
             $pwdpg = pg_escape_string($_REQUEST['pwd']);
             $emlpg = pg_escape_string($_REQUEST['email']);
-
-
-
-
-            
+ 
             $uid = htmlspecialchars($uidpg);
             $pwd = htmlspecialchars($pwdpg);
             $eml = htmlspecialchars($emlpg);
 
-
-
-
             //error handler
             //check empty fields
 
-            
             if (empty($uid) ||empty($pwd) ||empty($eml)) {
 
                 //echo "<script>alert('empty')/script>";
-                $this->doc .= "<a class = 'error'>un est champ vide!</a>";
+                $this->doc .= "<a class = 'error'>Un champs est vide!</a>";
             } else {//valid character check
                 $conn = new Connection();
                 $pdo = $conn->getPDO();
@@ -74,7 +66,7 @@ class Signup extends Page
 
 
                 if ($rows>0) {
-                    $this->doc .= "<a class = 'warn'>user utiliser</a>";
+                    $this->doc .= "<a class = 'warn'>Nom d'utilisateur utilisé</a>";
                 } else {
                     //hashing
                     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
@@ -110,7 +102,7 @@ class Signup extends Page
 
                     mail($eml, "Confirmation Films Favoris", $emailstring);
 
-                    $this->doc .= "<p class = 'succes'>tu est enregistrer!</p>";
+                    $this->doc .= "<p class = 'succes'>Compte enregistré!</p>";
                 }
             }
         }

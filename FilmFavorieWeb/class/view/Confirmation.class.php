@@ -7,7 +7,7 @@ class Confirmation extends Page
     {
         $this->doc = parent::initHTML("Confirmation", '');
         $this->doc .= parent::topNav();
-            
+        $retStr .= parent::beginEndBal("h1", "Confirmer un compte");    
         $this->doc .= $this->formConfirm();
 
         $this->doc .= parent::endBal("body");
@@ -69,7 +69,7 @@ class Confirmation extends Page
                         $sql->bindParam(':conf', $conf);
                         $sql->execute();
 
-                        $this->doc .= "Your user account has been confirmed.";
+                        $this->doc .= "Votre compte utilisateur a été confirmé.";
                     }
                 }
             }

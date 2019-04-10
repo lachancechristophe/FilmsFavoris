@@ -12,7 +12,7 @@ class AddMovie extends Page
         $this->verifAddMovie();
         $this->doc = parent::initHTML("Add Movie", '');
         $this->doc .= parent::topNav();
-        
+        $retStr .= parent::beginEndBal("h1", "Ajouter un film");
         $this->doc .= $this->formAddMovie();
         
         $this->doc .= parent::endBal("body");
@@ -46,14 +46,14 @@ class AddMovie extends Page
             } else {
                 if ($size > 1000000) {
                     header("location: add_movie.php?Cover=SizeTooBig");
-                    $this->doc .= '<p>photo trop grosse</p>';
+                    $this->doc .= '<p>Photo trop grosse</p>';
                     exit();
                 } else {
                     return true;
                 }
             }
             if ($movefile) {
-                header("location: add_movie.php?upload=Sucess");
+                header("location: add_movie.php?upload=Success");
             }
         }
     }

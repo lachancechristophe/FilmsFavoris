@@ -11,8 +11,8 @@ class ShowUser extends Page
         $query = "SELECT * FROM movie_user";
         $usersList = $pdo->query($query);
         
-        $this->doc = parent::initHTML("Movie user", '');
-            
+        $this->doc = parent::initHTML("Utilisateurs", '');
+        $retStr .= parent::beginEndBal("h1", "Liste des utilisateur");    
             
         $this->doc .= parent::topNav();
         

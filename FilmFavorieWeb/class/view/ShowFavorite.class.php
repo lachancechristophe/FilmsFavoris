@@ -9,7 +9,7 @@ class ShowFavorite extends Page
         $this->doc = parent::initHTML("Show Favorite", '');
 
         $this->doc .= parent::topNav();
-
+        $retStr .= parent::beginEndBal("h1", "Liste des favoris");
         if (empty($_SESSION['user_id'])) {
             $this->doc .= parent::beginEndBal("p", "Il faut etre connecté pour voir les favoris.");
             $this->doc .= parent::endBal("body");
@@ -79,7 +79,7 @@ class ShowFavorite extends Page
             $query = "DELETE FROM favorite_movie WHERE user_id=";
             $query .= $_SESSION['user_id']." AND movie_id=".$_REQUEST['movie_id'];
             $pdo->query($query);
-            $this->doc .= "Favorite deleted ! Refreshing in 3 sec...";
+            $this->doc .= "Favori supprimé.";
             header("Refresh:3");
         }
     }

@@ -9,9 +9,8 @@ class Signup extends Page
     {
         $this->doc = parent::initHTML("Signup", '');
 
-
         $this->doc .= parent::topNav();
-
+        $retStr .= parent::beginEndBal("h1", "Enregistrer un compte");
         $this->signUpCheck();
             
         $this->doc .= $this->formSignUp();
