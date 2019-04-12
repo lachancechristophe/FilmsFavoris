@@ -9,7 +9,9 @@ C:\Users\1734220\Desktop\tp2_prog_Serv\FilmsFavoris\FilmFavorieWeb\class\dao\lib
 avec vos information omnidb(postgres).
 ##3.Ensuite faire la database avec c'est information : 
 
-CREATE DATABASE favorite_movie
+CREATE DATABASE favorite_movie;
+
+###data base en premier ensuite le reste 
 
 CREATE
 TABLE public.movie_user
@@ -40,19 +42,18 @@ CREATE TABLE movie_user_confirm (
     user_id int,
     confirm_code varchar,
     confirmed boolean
-)
+);
 ALTER TABLE
---ONLY
 public.movie_user
-ADD email varchar(255)
+ADD email varchar(255);
 
 ALTER TABLE
 public.movie_user
-ADD confirmed boolean
-
+ADD confirmed boolean;
+ 
 ALTER TABLE
 public.movie
-ADD cover_path varchar(255) 
+ADD cover_path varchar(255);
 
 
 ##4.corriger le tp avec xampp
