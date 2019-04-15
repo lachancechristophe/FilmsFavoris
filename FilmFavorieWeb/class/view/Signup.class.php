@@ -56,14 +56,13 @@ class Signup extends Page
 
 
             if (false) {//strpos($uid, '<') !== false||strpos($a, '>') !== false
-                header("location:signup.php?signUp=NoInjectionXd");
-
+                
                 exit();
             } else {
                 if (empty($uid) ||empty($pwd) ||empty($eml)) {
 
                     //echo "<script>alert('empty')/script>";
-                    header("location:signup.php?signUp=empty");
+                    $this->doc .= "<p class = 'error'> un champ vide !</p><br>"
 
                     exit();
                 } else {//valid character check
@@ -78,8 +77,8 @@ class Signup extends Page
 
 
                     if ($rows>0) {
-                        header("location:signup.php?signUp=UserUtiliser");
-                        exit();
+                        $this->doc .= "<p class = 'error'> user utiliser !</p><br>";
+                    
                     } else {
                         //hashing
                         $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
@@ -119,8 +118,8 @@ class Signup extends Page
 
                         mail($eml, "Confirmation Films Favoris", $emailstring);
 
-                        header("location:signup.php?signUp=Success");
-                        exit();
+                        $this->doc .= "<p class = 'succes'> vous avez sign up !</p><br>";
+                        
                     }
                 }
             }

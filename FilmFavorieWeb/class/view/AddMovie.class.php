@@ -9,12 +9,12 @@ class AddMovie extends Page
     
     public function __construct()
     {
-        $this->verifAddMovie();
+        
         $this->doc = parent::initHTML("Add Movie", '');
         $this->doc .= parent::topNav();
         $this->doc .= parent::beginEndBal("h1", "Ajouter un film");
         $this->doc .= $this->formAddMovie();
-        
+        $this->verifAddMovie();
         $this->doc .= parent::endBal("body");
         $this->doc .= parent::endBal("html");
     }
@@ -41,20 +41,18 @@ class AddMovie extends Page
             $type = $_FILES['cover']['type'];
             $size = $_FILES['cover']['size'];
             if ($type != 'image/png' && $type != 'image/jpeg') {
-                header("location: add_movie.php?Cover=WrongType$type");
-                exit();
+                
+                $this->doc .= "<p class = 'error'> Mauvais Type : $type </p><br>";
+                
             } else {
                 if ($size > 1000000) {
-                    header("location: add_movie.php?Cover=SizeTooBig");
-                    $this->doc .= '<p>Photo trop grosse</p>';
-                    exit();
+                    $this->doc .= "<p class = 'error'>Photo trop grosse </p><br>";
+                   
                 } else {
                     return true;
                 }
             }
-            if ($movefile) {
-                header("location: add_movie.php?upload=Success");
-            }
+            
         }
     }
     protected function setInfoMovie()
@@ -74,8 +72,8 @@ class AddMovie extends Page
         if (isset($_POST['add_movie'])) {
             $this->setInfoMovie();
             if (empty($this->name) || empty($this->producer) || empty($this->date)) {
-                header("location:Add_movie.php?Addmovie=empty");
-                exit();
+                $this->doc .= "<p class = 'error'> champ vide </p><br>";
+             
             } else {
                 return true;
             }

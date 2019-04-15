@@ -124,7 +124,7 @@ class AddMovie extends Page
             
             $sql->execute();
             /*message*/
-            $this->doc .= "<a class = 'succes'> vous avez créé un film!</a><br>";
+            $this->doc .= "<p class = 'succes'> vous avez créé un film!</p><br>";
         }
     }
 }

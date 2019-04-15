@@ -58,10 +58,10 @@ class Login extends Page
                 if (password_verify($mypassword, $passwordpg) && $data[0]->confirmed) {
                     $_SESSION['user_id'] = $data[0]->id;
                     $_SESSION['user_name'] = $data[0]->username;
-                    header("location: index.php?Login_success");
+                    $this->doc .= "<p class = 'succes'>login  succes !</p>";
                 } else {
                     if ($data[0]->confirmed) {
-                        $this->doc .= "<p class = 'error'>Nom d'utilisateur ou mot de passe invalide.</p";
+                        $this->doc .= "<p class = 'error'>Nom d'utilisateur ou mot de passe invalide.</p>";
                     }
                 }
             } else {
